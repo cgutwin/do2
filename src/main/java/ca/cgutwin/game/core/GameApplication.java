@@ -1,6 +1,5 @@
 package ca.cgutwin.game.core;
 
-
 import ca.cgutwin.game.screens.MenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

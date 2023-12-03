@@ -36,7 +36,7 @@ public class MenuScreen implements Screen {
     game.getBatch().end();
 
     if (Gdx.input.isTouched()) {
-      System.out.println("dispose");
+      game.setScreen(new GameScreen(game));
       dispose();
     }
   }
