@@ -2,7 +2,9 @@ package ca.cgutwin.game.screens;
 
 import ca.cgutwin.game.core.GameApplication;
 import ca.cgutwin.game.ecs.managers.GameStateManager;
+import ca.cgutwin.game.io.InputManager;
 import ca.cgutwin.game.states.PlayState;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
 public class GameScreen implements Screen {
@@ -12,12 +14,14 @@ public class GameScreen implements Screen {
   public GameScreen(GameApplication game) {
     this.game         = game;
     this.stateManager = new GameStateManager();
+
+
     stateManager.pushState(new PlayState(stateManager));
   }
 
   @Override
   public void show() {
-
+    Gdx.input.setInputProcessor(InputManager.getInstance());
   }
 
   @Override
@@ -43,7 +47,6 @@ public class GameScreen implements Screen {
 
   @Override
   public void hide() {
-
   }
 
   @Override

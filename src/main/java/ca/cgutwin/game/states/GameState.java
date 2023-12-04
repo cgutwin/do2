@@ -10,11 +10,10 @@ public abstract class GameState {
     this.gameStateManager = gsm;
   }
 
-  public abstract void handleInput();
   public abstract void update(float delta);
   public abstract void render(SpriteBatch sb);
   public abstract void dispose();
-
+  public abstract void hide(SpriteBatch sb);
   // Optionally, methods for entering and exiting the state
   public abstract void enter();
   public abstract void exit();
