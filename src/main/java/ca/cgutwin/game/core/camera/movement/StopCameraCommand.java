@@ -3,7 +3,6 @@ package ca.cgutwin.game.core.camera.movement;
 import ca.cgutwin.game.core.camera.CameraController;
 
 public class StopCameraCommand implements ICommand {
-  int speed = 1;
   private final CameraController cameraController;
 
   public StopCameraCommand(CameraController cameraController) {

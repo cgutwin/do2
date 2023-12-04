@@ -1,7 +1,8 @@
 package ca.cgutwin.game.states;
 
 import ca.cgutwin.game.core.camera.CameraController;
-import ca.cgutwin.game.core.camera.movement.MoveCameraUpCommand;
+import ca.cgutwin.game.core.camera.movement.EDirections;
+import ca.cgutwin.game.core.camera.movement.MoveCameraCommand;
 import ca.cgutwin.game.core.camera.movement.StopCameraCommand;
 import ca.cgutwin.game.ecs.managers.GameStateManager;
 import ca.cgutwin.game.io.InputManager;
@@ -15,18 +16,26 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class PlayState extends GameState {
   private final OrthographicCamera camera;
+  private final CameraController cameraController;
+
   Texture img = new Texture(Gdx.files.internal("img.png"));
 
   public PlayState(GameStateManager stateManager) {
     super(stateManager);
 
     this.camera = new OrthographicCamera();
+    cameraController = new CameraController(camera);
 
-    CameraController cameraController = new CameraController(camera);
     InputManager inputManager = InputManager.getInstance();
 
-    inputManager.bindKeyDown(Input.Keys.W, new MoveCameraUpCommand(cameraController));
+    inputManager.bindKeyDown(Input.Keys.W, new MoveCameraCommand(cameraController, EDirections.UP));
     inputManager.bindKeyUp(Input.Keys.W, new StopCameraCommand(cameraController));
+    inputManager.bindKeyDown(Input.Keys.S, new MoveCameraCommand(cameraController, EDirections.DOWN));
+    inputManager.bindKeyUp(Input.Keys.S, new StopCameraCommand(cameraController));
+    inputManager.bindKeyDown(Input.Keys.A, new MoveCameraCommand(cameraController, EDirections.LEFT));
+    inputManager.bindKeyUp(Input.Keys.A, new StopCameraCommand(cameraController));
+    inputManager.bindKeyDown(Input.Keys.D, new MoveCameraCommand(cameraController, EDirections.RIGHT));
+    inputManager.bindKeyUp(Input.Keys.D, new StopCameraCommand(cameraController));
   }
 
   @Override
@@ -37,6 +46,8 @@ public class PlayState extends GameState {
   @Override
   public void render(SpriteBatch sb) {
     ScreenUtils.clear(0, 0.2f, 0, 1);
+
+    cameraController.update();
 
     // Set the SpriteBatch's projection matrix to the camera's combined matrix
     sb.setProjectionMatrix(camera.combined);

@@ -2,17 +2,18 @@ package ca.cgutwin.game.core.camera.movement;
 
 import ca.cgutwin.game.core.camera.CameraController;
 
-public class MoveCameraUpCommand implements ICommand {
-  int speed = 1;
+public class MoveCameraCommand implements ICommand {
   private final CameraController cameraController;
+  private final EDirections direction;
 
-  public MoveCameraUpCommand(CameraController cameraController) {
+  public MoveCameraCommand(CameraController cameraController, EDirections direction) {
     this.cameraController = cameraController;
+    this.direction = direction;
   }
 
   @Override
   public void execute() {
     // Move the camera upwards
-    cameraController.moveUp(speed);
+    cameraController.setMovementDirection(direction);
   }
 }
