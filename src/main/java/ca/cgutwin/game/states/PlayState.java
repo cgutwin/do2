@@ -6,6 +6,8 @@ import ca.cgutwin.game.core.camera.movement.MoveCameraCommand;
 import ca.cgutwin.game.core.camera.movement.StopCameraCommand;
 import ca.cgutwin.game.ecs.managers.GameStateManager;
 import ca.cgutwin.game.io.InputManager;
+import ca.cgutwin.game.mapping.Crypt;
+import ca.cgutwin.game.mapping.GameMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,14 +19,16 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class PlayState extends GameState {
   private final OrthographicCamera camera;
   private final CameraController cameraController;
+  private final GameMap map;
 
   Texture img = new Texture(Gdx.files.internal("img.png"));
 
   public PlayState(GameStateManager stateManager) {
     super(stateManager);
 
-    this.camera = new OrthographicCamera();
+    this.camera      = new OrthographicCamera();
     cameraController = new CameraController(camera);
+    this.map         = new Crypt(5, 5);
 
     InputManager inputManager = InputManager.getInstance();
 
@@ -53,8 +57,10 @@ public class PlayState extends GameState {
     sb.setProjectionMatrix(camera.combined);
     sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
+
     sb.begin();
     sb.draw(img, 0, 0);
+    map.render(sb);
     sb.end();
   }
 
