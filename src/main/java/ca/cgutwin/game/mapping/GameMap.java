@@ -13,7 +13,6 @@ public abstract class GameMap {
     this.width        = width;
     this.height       = height;
     this.chunkManager = new ChunkManager(ChunkComponent.CHUNK_SIZE);
-    generateMap();
   }
 
   protected abstract void generateMap();

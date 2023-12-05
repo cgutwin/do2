@@ -1,12 +1,20 @@
-package ca.cgutwin.game.mapping;
+package ca.cgutwin.game.mapping.crypt;
 
-import ca.cgutwin.game.core.tiles.SnowTile;
 import ca.cgutwin.game.ecs.components.ChunkComponent;
+import ca.cgutwin.game.factories.SpriteSheetFactory;
+import ca.cgutwin.game.mapping.GameMap;
+import ca.cgutwin.game.mapping.crypt.tiles.TileFactory;
 
 public class Crypt extends GameMap {
+  SpriteSheetFactory sprites;
+  TileFactory tileFactory;
 
   public Crypt(int mapWidth, int mapHeight) {
     super(mapWidth, mapHeight);
+    this.sprites     = new SpriteSheetFactory();
+    this.tileFactory = new TileFactory(this.sprites);
+    sprites.loadSpriteSheet("snowSheet", "tileset/tileset.png");
+    generateMap();
   }
 
   @Override
@@ -26,7 +34,7 @@ public class Crypt extends GameMap {
   private void fillChunkWithTiles(ChunkComponent chunk) {
     for (int x = 0; x < ChunkComponent.CHUNK_SIZE; x++) {
       for (int y = 0; y < ChunkComponent.CHUNK_SIZE; y++) {
-        chunk.setTile(x, y, new SnowTile());
+        chunk.setTile(x, y, tileFactory.createTile("Snow"));
       }
     }
   }

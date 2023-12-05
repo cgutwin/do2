@@ -12,6 +12,7 @@ public class CameraController {
   public CameraController(OrthographicCamera camera) {
     this.camera = camera;
     camera.setToOrtho(false, 800, 480);
+    camera.zoom = 0.75F;
   }
 
   public void setMovementDirection(EDirections direction) {

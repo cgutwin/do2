@@ -6,7 +6,7 @@ import ca.cgutwin.game.core.camera.movement.MoveCameraCommand;
 import ca.cgutwin.game.core.camera.movement.StopCameraCommand;
 import ca.cgutwin.game.ecs.managers.GameStateManager;
 import ca.cgutwin.game.io.InputManager;
-import ca.cgutwin.game.mapping.Crypt;
+import ca.cgutwin.game.mapping.crypt.Crypt;
 import ca.cgutwin.game.mapping.GameMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

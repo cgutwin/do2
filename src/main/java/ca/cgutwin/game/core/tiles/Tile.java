@@ -1,14 +1,14 @@
 package ca.cgutwin.game.core.tiles;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class Tile implements ITile {
   protected static final int TILE_SIZE = 16;
 
-  protected Texture texture; // The texture for rendering the tile
+  protected TextureRegion texture; // The texture for rendering the tile
 
-  public Tile(Texture texture) {
+  public Tile(TextureRegion texture) {
     this.texture = texture;
   }
 
@@ -21,6 +21,6 @@ public abstract class Tile implements ITile {
   }
 
   public void dispose() {
-    texture.dispose();
+    texture.getTexture().dispose();
   }
 }
