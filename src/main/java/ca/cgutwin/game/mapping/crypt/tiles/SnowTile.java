@@ -11,7 +11,7 @@ public class SnowTile extends Tile {
 
   @Override
   public void render(SpriteBatch batch, int x, int y) {
-    batch.draw(texture, x, y);
+    batch.draw(texture, x, y, 32F, 32F);
   }
 
   @Override

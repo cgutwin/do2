@@ -25,7 +25,7 @@ public class ChunkComponent implements Component {
       for (int y = 0; y < CHUNK_SIZE; y++) {
         Tile tile = getTile(x, y);
         if (tile != null) {
-          tile.render(batch, x*8, y*8);
+          tile.render(batch, x*32, y*32);
         }
       }
     }
