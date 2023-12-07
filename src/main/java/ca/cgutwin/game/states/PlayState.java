@@ -6,22 +6,26 @@ import ca.cgutwin.game.core.camera.movement.MoveCameraCommand;
 import ca.cgutwin.game.core.camera.movement.StopCameraCommand;
 import ca.cgutwin.game.ecs.managers.GameStateManager;
 import ca.cgutwin.game.io.InputManager;
-import ca.cgutwin.game.mapping.crypt.Crypt;
 import ca.cgutwin.game.mapping.GameMap;
+import ca.cgutwin.game.mapping.crypt.Crypt;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-//import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class PlayState extends GameState {
   private final OrthographicCamera camera;
   private final CameraController cameraController;
   private final GameMap map;
+  private TiledMap tiledMap;
+  private OrthogonalTiledMapRenderer mapRenderer;
 
-//  Texture img = new Texture(Gdx.files.internal("img.png"));
+  //  Texture img = new Texture(Gdx.files.internal("img.png"));
 
   public PlayState(GameStateManager stateManager) {
     super(stateManager);
@@ -40,6 +44,11 @@ public class PlayState extends GameState {
     inputManager.bindKeyUp(Input.Keys.A, new StopCameraCommand(cameraController));
     inputManager.bindKeyDown(Input.Keys.D, new MoveCameraCommand(cameraController, EDirections.RIGHT));
     inputManager.bindKeyUp(Input.Keys.D, new StopCameraCommand(cameraController));
+
+    tiledMap = new TmxMapLoader().load("./map.tmx");
+
+    // Initialize the map renderer
+    mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
   }
 
   @Override
@@ -57,10 +66,12 @@ public class PlayState extends GameState {
     sb.setProjectionMatrix(camera.combined);
     sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
+    mapRenderer.setView(camera);
+    mapRenderer.render();
 
     sb.begin();
-//    sb.draw(img, 0, 0);
-    map.render(sb);
+    //    sb.draw(img, 0, 0);
+    //    map.render(sb);
     sb.end();
   }
 
@@ -71,7 +82,7 @@ public class PlayState extends GameState {
 
   @Override
   public void hide(SpriteBatch sb) {
-//    img.dispose();
+    //    img.dispose();
     sb.dispose();
   }
 

@@ -7,12 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 public class CameraController {
   private final OrthographicCamera camera;
   private final Vector2 movementDirection = new Vector2(0, 0);
-  private final float moveSpeed = 2.0f;  // Speed of camera movement
+  private final float moveSpeed = 0.8f;  // Speed of camera movement
 
   public CameraController(OrthographicCamera camera) {
     this.camera = camera;
     camera.setToOrtho(false, 800, 480);
     camera.position.set(0F, 0F, 0F);
+    this.camera.zoom = 0.2F;
   }
 
   public void setMovementDirection(EDirections direction) {
