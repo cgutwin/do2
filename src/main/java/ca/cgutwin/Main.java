@@ -1,6 +1,6 @@
 package ca.cgutwin;
 
-import ca.cgutwin.game.core.GameApplication;
+import ca.cgutwin.core.GameApplication;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
