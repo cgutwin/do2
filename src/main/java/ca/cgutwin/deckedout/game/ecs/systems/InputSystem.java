@@ -23,23 +23,27 @@ public class InputSystem implements System {
     Entity entity = entityManager.getEntityById(playerEntityId);
     MovementComponent movement = entity.getComponent(MovementComponent.class);
 
-    if (movement == null) return;
+    if (movement == null) { return; }
 
     // Reset movement to zero at the beginning of each frame
     movement.velocityX = 0;
     movement.velocityY = 0;
 
+    float speed = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? movement.sprintSpeed : movement.speed;
+
     // Process input and update movement component
     if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-      movement.velocityX = -movement.speed;
-    } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-      movement.velocityX = movement.speed;
+      movement.velocityX = -speed;
+    }
+    else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+      movement.velocityX = speed;
     }
 
     if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-      movement.velocityY = movement.speed;
-    } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-      movement.velocityY = -movement.speed;
+      movement.velocityY = speed;
+    }
+    else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+      movement.velocityY = -speed;
     }
   }
 }
