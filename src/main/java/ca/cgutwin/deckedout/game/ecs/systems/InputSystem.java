@@ -3,15 +3,18 @@ package ca.cgutwin.deckedout.game.ecs.systems;
 import ca.cgutwin.deckedout.game.ecs.components.MovementComponent;
 import ca.cgutwin.deckedout.game.ecs.entities.Entity;
 import ca.cgutwin.deckedout.game.ecs.managers.EntityManager;
+import ca.cgutwin.deckedout.game.events.ClankGameEvent;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 public class InputSystem implements System {
   private final EntityManager entityManager = EntityManager.getInstance();
   private final int playerEntityId; // ID of the player entity
+  private final EventSystem eventSystem;
 
-  public InputSystem(int playerEntityId) {
+  public InputSystem(int playerEntityId, EventSystem eventSystem) {
     this.playerEntityId = playerEntityId;
+    this.eventSystem    = eventSystem;
   }
 
   @Override
@@ -29,7 +32,15 @@ public class InputSystem implements System {
     movement.velocityX = 0;
     movement.velocityY = 0;
 
-    float speed = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? movement.sprintSpeed : movement.speed;
+    float speed;
+
+    if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+      speed = movement.sprintSpeed;
+      eventSystem.dispatchEventEvery(2F, new ClankGameEvent(1), dT);
+    }
+    else {
+      speed = movement.speed;
+    }
 
     // Process input and update movement component
     if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {

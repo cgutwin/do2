@@ -3,11 +3,16 @@ package ca.cgutwin.deckedout.game.core;
 import ca.cgutwin.deckedout.game.core.screens.PlayScreen;
 import ca.cgutwin.deckedout.game.ecs.managers.GameStateManager;
 import ca.cgutwin.deckedout.game.ecs.managers.MapManager;
+import ca.cgutwin.deckedout.game.ecs.systems.EventSystem;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameApplication extends Game {
-  SpriteBatch sb;
+  private SpriteBatch sb;
+  private EventSystem eventSystem;
+
+
+
 
   @Override
   public void create() {
@@ -15,7 +20,11 @@ public class GameApplication extends Game {
     GameStateManager gameStateManager = new GameStateManager();
     MapManager mapManager = new MapManager();
 
-    setScreen(new PlayScreen(this, gameStateManager, mapManager));
+    // Event System Setup
+    eventSystem  = EventSystem.getInstance();
+
+
+    setScreen(new PlayScreen(this, gameStateManager, mapManager, eventSystem));
   }
 
   @Override

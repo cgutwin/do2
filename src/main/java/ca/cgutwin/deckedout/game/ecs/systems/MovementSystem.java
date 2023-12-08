@@ -12,9 +12,10 @@ public class MovementSystem implements System {
   private final SpriteBatch sb;
   private final EntityManager entityManager = EntityManager.getInstance();
   private final MapManager mapManager;
+  private final float gravity = -9.8f;
 
   public MovementSystem(SpriteBatch spriteBatch, MapManager mapManager) {
-    this.sb = spriteBatch;
+    this.sb         = spriteBatch;
     this.mapManager = mapManager;
   }
 
@@ -33,11 +34,11 @@ public class MovementSystem implements System {
     MovementComponent movement = entity.getComponent(MovementComponent.class);
     PositionComponent position = entity.getComponent(PositionComponent.class);
 
-    float newX = position.x + movement.velocityX * dT;
-    float newY = position.y + movement.velocityY * dT;
+    float newX = position.x+movement.velocityX*dT;
+    float newY = position.y+movement.velocityY*dT;
 
-    newX = MathUtils.clamp(newX, 0, 40*8 - 8);
-    newY = MathUtils.clamp(newY, 0, 40*8 - 8);
+    newX = MathUtils.clamp(newX, 0, 40*8-8);
+    newY = MathUtils.clamp(newY, 0, 40*8-8);
 
     if (canMoveTo(newX, newY, 8, 8)) {
       position.x = newX;
@@ -47,15 +48,14 @@ public class MovementSystem implements System {
 
   public boolean canMoveTo(float x, float y, float playerWidth, float playerHeight) {
     // Calculate the corners of the player's bounding box
-    float left = x - playerWidth / 2;
-    float right = x + playerWidth / 2;
-    float bottom = y - playerHeight / 2;
-    float top = y + playerHeight / 2;
+    float left = x-playerWidth/2;
+    float right = x+playerWidth/2;
+    float bottom = y-playerHeight/2;
+    float top = y+playerHeight/2;
 
     // Check if any corner is in a non-walkable tile
-    return mapManager.isTileWalkable(left, bottom) &&
-            mapManager.isTileWalkable(right, bottom) &&
-            mapManager.isTileWalkable(left, top) &&
-            mapManager.isTileWalkable(right, top);
+    return mapManager.isTileWalkable(left, bottom) && mapManager.isTileWalkable(right,
+                                                                                bottom) && mapManager.isTileWalkable(
+            left, top) && mapManager.isTileWalkable(right, top);
   }
 }
