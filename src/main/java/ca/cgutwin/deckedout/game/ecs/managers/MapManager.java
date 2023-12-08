@@ -2,6 +2,7 @@ package ca.cgutwin.deckedout.game.ecs.managers;
 
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class MapManager {
@@ -9,7 +10,7 @@ public class MapManager {
   private TiledMap currentMap;
 
   public MapManager() { }
-  
+
   /**
    * Loads a map and sets it as the current map.
    *
@@ -41,6 +42,22 @@ public class MapManager {
       return currentMap.getProperties();
     }
     return null;
+  }
+
+  public boolean isTileWalkable(float x, float y) {
+    TiledMapTileLayer collisionLayer = (TiledMapTileLayer) currentMap.getLayers().get("CollisionLayer");
+    if (collisionLayer == null) return true;
+
+    // Convert world coordinates (e.g., pixels) to tile coordinates
+    int tileWidth = collisionLayer.getTileWidth();
+    int tileHeight = collisionLayer.getTileHeight();
+
+    float tileX = x / tileWidth;
+    float tileY = y / tileHeight;
+
+    TiledMapTileLayer.Cell cell = collisionLayer.getCell((int) (tileX + 0.5F), (int) (tileY + 0.5F));
+
+    return cell == null;
   }
 
   /**

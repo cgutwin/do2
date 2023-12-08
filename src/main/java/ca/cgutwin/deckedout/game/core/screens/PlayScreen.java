@@ -33,7 +33,7 @@ public class PlayScreen implements Screen {
     mapManager.loadMap("./map.tmx");
     this.cameraController   = new CameraController(800, 480);
     this.mapRenderingSystem = new MapRenderingSystem(mapManager, cameraController.getCamera());
-    this.movementSystem     = new MovementSystem(game.getSpriteBatch());
+    this.movementSystem     = new MovementSystem(game.getSpriteBatch(), mapManager);
     this.inputSystem        = new InputSystem(gameStateManager.getPlayer().getId());
     this.renderSystem       = new RenderSystem(game.getSpriteBatch(), cameraController.getCamera());
   }
@@ -48,7 +48,6 @@ public class PlayScreen implements Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
     PositionComponent positionComponent = player.getComponent(PositionComponent.class);
 
     cameraController.updateCameraPosition();
@@ -56,8 +55,8 @@ public class PlayScreen implements Screen {
 
     mapRenderingSystem.update(delta);
     renderSystem.update(delta);
-    inputSystem.update(delta);
     movementSystem.update(delta);
+    inputSystem.update(delta);
   }
 
   @Override

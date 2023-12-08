@@ -4,7 +4,6 @@ import ca.cgutwin.deckedout.game.ecs.entities.Entity;
 import ca.cgutwin.deckedout.game.ecs.entities.Player;
 
 public class GameStateManager {
-  private EntityManager entityManager = EntityManager.getInstance();
   private Player player;
   private GameState currentState;
 
