@@ -6,6 +6,7 @@ import ca.cgutwin.deckedout.game.ecs.entities.Entity;
 import ca.cgutwin.deckedout.game.ecs.managers.EntityManager;
 import ca.cgutwin.deckedout.game.ecs.managers.MapManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 
 public class MovementSystem implements System {
   private final SpriteBatch sb;
@@ -34,6 +35,9 @@ public class MovementSystem implements System {
 
     float newX = position.x + movement.velocityX * dT;
     float newY = position.y + movement.velocityY * dT;
+
+    newX = MathUtils.clamp(newX, 0, 40*8 - 8);
+    newY = MathUtils.clamp(newY, 0, 40*8 - 8);
 
     if (canMoveTo(newX, newY, 8, 8)) {
       position.x = newX;

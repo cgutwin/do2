@@ -61,7 +61,7 @@ public class PlayScreen implements Screen {
 
   @Override
   public void resize(int i, int i1) {
-
+    cameraController.getViewport().update(i, i1);
   }
 
   @Override

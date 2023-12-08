@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-up" width="20" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="11" nextobjectid="2">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-up" width="40" height="40" tilewidth="8" tileheight="8" infinite="0" nextlayerid="12" nextobjectid="2">
  <tileset firstgid="1" name="tileset2" tilewidth="8" tileheight="8" tilecount="1024" columns="32">
   <image source="tileset/tileset.png" width="256" height="256"/>
-  <tile id="384">
+  <tile id="384" probability="0.75">
    <properties>
     <property name="walkable" type="bool" value="true"/>
    </properties>
   </tile>
-  <tile id="385">
+  <tile id="385" probability="0.1">
    <properties>
     <property name="walkable" type="bool" value="true"/>
    </properties>
   </tile>
-  <tile id="386">
+  <tile id="386" probability="0.1">
    <properties>
     <property name="walkable" type="bool" value="true"/>
    </properties>
   </tile>
-  <tile id="387">
+  <tile id="387" probability="0.05">
    <properties>
     <property name="walkable" type="bool" value="true"/>
    </properties>
@@ -208,24 +208,29 @@
    </properties>
   </tile>
  </tileset>
- <layer id="8" name="Water" width="20" height="20">
+ <layer id="8" name="Water" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BwgiOMDAsOMzIcOMhINfMYQGaBzKWSeQkg9x2mkvtGwSgYagAAQPYKBQ==
+   eJzt0MENgCAQAMG7Ti3NUjBQmNyX8MeYmQo2GwHAamTcPaM9ebpkb/ZFtVXn6Zad2XXVv/7RfwAAAAD83wsQNgoF
   </data>
  </layer>
- <layer id="1" name="Tile Layer 1" width="20" height="20">
+ <layer id="11" name="Tile Layer 5" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxrZGRgaITiJiQ2LoxPTRMWNjpNifmkmEMOxmY2sf6lln2kqiU1fKkRDrS2C4ZbgbgNiNupZOZSIF4GxMuJDLcmLPLI/KNAfAyIj5MQLk14zCbGDFrFAwx/QMOUhvtGNPyTkWEBejiQ4s+HTJjYkgliJinhCFPTxgxhL2KCYJB5k4Fu/MCIaSYxcQoyg1Lz0DHMLJh5E8k0rwnNLJj4BKh55JRHAJL03As=
+   eJy1WNuuwzAIWz/9JPnws4dFYsw2kEslpC5NG8cYAnu9zl5/z7eN53cssva2/rk/fak10XgPxk9fXWCpcjku8sew9CLW01cz/FkdMU7nswbub+mvOUwMI9Ken3MD3455v9/A5zlQvo1i+AY+xIfyJdLDfO8WvgZwRNyhmL6FT/ktmtMv4uuEFxS7Cv/N881iRD7zYwhrFFM7+FRMoHio5JgT+DxGdZbZ866BcYZvFSPjJYMxq8FdfNnYjfL4Dr5Gnlfzi5rP6qsT/u3Pd/1iOVI5z8fODXxz71H8+vxS5XvVT8hW+hDGrffFrBkHmbdjmW+xOZk86vUU1QXo7EBrqrxpexzLW6betbhX+fAYqnpTz6u5OevrbAxE/U42ZiMsqs+zulI5DOlPYUT5t8ojsqiXrfq/mmsQ3sjfao2or9zB1tz6g2CxfmVnBerTM3tXOYtZ1Mew/j9rHv8gv9E+V2olhiGjZa8LjzW7popjf5+NcYXdn7Fqrxk9rfYf/syq1GmT78j3bA9dfN/WIsy/zLden8PdM94qsWLrwAbWRmtka6rsc8ujr3WY31lfx2ofpR+k2+g/jIymvAYq3Kg9VnlGFp0P6p1sbrSWwTTn/QPxR2/S
   </data>
  </layer>
- <layer id="3" name="Tile Layer 3" width="20" height="20">
+ <layer id="1" name="Tile Layer 1" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgaQHSgHUBFIMow8P4JB2ILGps/lAGu+BnoeBssYKiFw1Bz71ABAMXPAXo=
+   eJztlksOgjAQhmk9lceDRNxqvIAxQdceQj2HN2DrzmlKk1Lsu1NczJ/8AQJhvswLWtY07eROO7fZ9Yy4V1pmXPMYy4vFF5NDl7H5fKxr1TfFv1hr8dny5OvPWnypdcfgy50JzPy52HbgHrxfeX5tjAP4Cr4F9B3W/Jrx9OsH+Al+BbBh17fz9H3IrPzb/quRv5HNnbtnSuvO5v6w5qzH9u1p87y03nzpLZeMMX2I1X/9Rr77wqUF3wlyOLIlo6/OGHyCKZcPez8rNsV3TOTDyp+yinOY+GK+y1j/ByQSiUQikUgkEolUS1+uI9wL
   </data>
  </layer>
- <layer id="10" name="CollisionLayer" width="20" height="20">
+ <layer id="3" name="Tile Layer 3" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgaYCHjQLuAegDkl4H2D63dQA2zYW6kljth5lBiHrJeartvKIGh5mdc7h1q/hhsAAAmFwtl
+   eJzt08EJACAMA8Au4S5u4v6b6AYiFAt6B/2HlESQoVUH+EgLfe+Mdb06xIFRHeBxt/Zil3/y91z6BAAAgDwTNkYBeg==
+  </data>
+ </layer>
+ <layer id="10" name="CollisionLayer" width="40" height="40" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt0bEJACAQBEHtvwo7FQPByOjRF2cqWO5KIUKrtwv+Mba2995rG2VsnRtmbBtmV6a+tSX7fsTxcaxTe/oNAACAH3QvsAtl
   </data>
  </layer>
 </map>

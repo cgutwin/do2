@@ -1,3 +1,63 @@
 {
-    "property.type": "bool"
+    "activeFile": "src/main/resources/map.tmx",
+    "expandedProjectPaths": [
+        "src/main/resources",
+        ".",
+        "target/classes",
+        "src",
+        "src/main"
+    ],
+    "fileStates": {
+        "": {
+            "scaleInEditor": 4
+        },
+        "map.tmx": {
+            "scale": 4,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 86.625,
+                "y": 113.25
+            }
+        },
+        "src/main/resources/map.tmx": {
+            "expandedGroupLayers": [
+                5
+            ],
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 95.5,
+                "y": 194.5
+            }
+        },
+        "src/main/resources/map.tmx#tileset2": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "src/main/resources/tileset2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileset1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileset2.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 5.5
+        }
+    },
+    "openFiles": [
+        "src/main/resources/map.tmx"
+    ],
+    "project": "deckedout.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "src/main/resources/map.tmx",
+        "src/main/resources/tileset2.tsx",
+        "map.tmx",
+        "tileset2.tsx",
+        "tileset1.tsx"
+    ],
+    "resizeMap.removeObjects": true
 }

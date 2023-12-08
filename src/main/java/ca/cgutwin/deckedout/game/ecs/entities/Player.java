@@ -25,7 +25,7 @@ public class Player extends Entity {
     Texture texture = new Texture(Gdx.files.internal("./tileset/tileset.png"));
     Sprite sprite = new Sprite(texture, 40, 224, 8, 8);
 
-    this.positionComponent = new PositionComponent(3, 3);
+    this.positionComponent = new PositionComponent(24, 22*8);
     this.movementComponent = new MovementComponent(50);
 
     this.player.addComponent(positionComponent);
