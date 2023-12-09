@@ -12,10 +12,6 @@ public class Player extends Entity {
   private Entity player;
   private EntityManager entityManager = EntityManager.getInstance();
 
-  public PositionComponent getPositionComponent() {
-    return positionComponent;
-  }
-
   private final PositionComponent positionComponent;
   private final MovementComponent movementComponent;
 

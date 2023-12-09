@@ -4,6 +4,7 @@ import ca.cgutwin.deckedout.game.core.GameApplication;
 import ca.cgutwin.deckedout.game.ecs.components.PositionComponent;
 import ca.cgutwin.deckedout.game.ecs.controllers.CameraController;
 import ca.cgutwin.deckedout.game.ecs.entities.Entity;
+import ca.cgutwin.deckedout.game.ecs.managers.EnemyManager;
 import ca.cgutwin.deckedout.game.ecs.managers.GameStateManager;
 import ca.cgutwin.deckedout.game.ecs.managers.MapManager;
 import ca.cgutwin.deckedout.game.ecs.systems.*;
@@ -22,15 +23,20 @@ public class PlayScreen implements Screen {
   private final RenderSystem renderSystem;
   private final InputSystem inputSystem;
   private final EventSystem eventSystem;
-
+  private final Entity player;
   private ClankSystem clankSystem;
   private HazardSystem hazardSystem;
-  private final Entity player;
+  private EnemyManager enemyManager;
 
-  public PlayScreen(GameApplication game, GameStateManager gameStateManager, MapManager mapManager, EventSystem eventSystem) {
+  public PlayScreen(
+          GameApplication game,
+          GameStateManager gameStateManager,
+          MapManager mapManager,
+          EventSystem eventSystem
+  ) {
     this.mapManager       = mapManager;
     this.gameStateManager = gameStateManager;
-    this.eventSystem = eventSystem;
+    this.eventSystem      = eventSystem;
     this.player           = this.gameStateManager.getPlayer();
 
     mapManager.loadMap("./map.tmx");
@@ -40,11 +46,15 @@ public class PlayScreen implements Screen {
     this.movementSystem     = new MovementSystem(game.getSpriteBatch(), mapManager);
     this.inputSystem        = new InputSystem(gameStateManager.getPlayer().getId(), eventSystem);
     this.renderSystem       = new RenderSystem(game.getSpriteBatch(), cameraController.getCamera());
+    this.enemyManager       = new EnemyManager();
+
     this.clankSystem  = new ClankSystem();
     this.hazardSystem = new HazardSystem();
 
     eventSystem.addListener(ClankGameEvent.class, clankSystem);
     eventSystem.addListener(HazardGameEvent.class, hazardSystem);
+
+    this.enemyManager.spawnEnemy();
   }
 
   @Override
