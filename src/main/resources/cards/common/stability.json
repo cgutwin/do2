@@ -1,0 +1,36 @@
+{
+  "name": {
+    "full": "Stability",
+    "short": "STA"
+  },
+  "price": 8,
+  "rarity": 0,
+  "limit": 5,
+  "ethereal": false,
+  "permanent": false,
+  "extra_perks": false,
+  "queues": {
+    "blocks": {
+      "hazard": 2
+    }
+  },
+  "effects": {
+    "speed": false,
+    "jump": false,
+    "regeneration": false
+  },
+  "negatives": {
+    "clank": 0,
+    "hazard": 0
+  },
+  "deck_actions": {
+    "recycle": {
+      "value": false,
+      "amount": 0
+    },
+    "stumble": {
+      "value": false,
+      "amount": 0
+    }
+  }
+}

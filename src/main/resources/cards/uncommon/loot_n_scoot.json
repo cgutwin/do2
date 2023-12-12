@@ -1,0 +1,34 @@
+{
+  "name": {
+    "full": "Loot & Scoot",
+    "short": "LAS"
+  },
+  "price": 20,
+  "rarity": 1,
+  "limit": 3,
+  "ethereal": false,
+  "permanent": false,
+  "extra_perks": false,
+  "queues": {
+    "drops": {
+      "coins": 7
+    }
+  },
+  "effects": {
+    "speed": true
+  },
+  "negatives": {
+    "clank": 0,
+    "hazard": 0
+  },
+  "deck_actions": {
+    "recycle": {
+      "value": false,
+      "amount": 0
+    },
+    "stumble": {
+      "value": false,
+      "amount": 0
+    }
+  }
+}

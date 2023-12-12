@@ -1,0 +1,36 @@
+{
+  "name": {
+    "full": "Evasion",
+    "short": "EVA"
+  },
+  "price": 16,
+  "rarity": 1,
+  "limit": 3,
+  "ethereal": false,
+  "permanent": false,
+  "extra_perks": false,
+  "queues": {
+    "blocks": {
+      "clank": 4
+    }
+  },
+  "effects": {
+    "speed": false,
+    "jump": false,
+    "regeneration": false
+  },
+  "negatives": {
+    "clank": 0,
+    "hazard": 0
+  },
+  "deck_actions": {
+    "recycle": {
+      "value": false,
+      "amount": 0
+    },
+    "stumble": {
+      "value": false,
+      "amount": 0
+    }
+  }
+}

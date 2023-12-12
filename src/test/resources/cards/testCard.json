@@ -1,0 +1,34 @@
+{
+  "name": {
+    "longName": "Moment of Clarity",
+    "shortName": "MOC"
+  },
+  "type": 1,
+  "price": 6,
+  "rarity": 0,
+  "limit": 5,
+  "extra_perks": false,
+  "queues": {
+    "blocks": {
+      "clank": 2,
+      "hazard": 2
+    },
+    "drops": {
+      "embers": 2,
+      "treasure": 4
+    }
+  },
+  "effects": {
+    "speed": false,
+    "jump": false,
+    "regen": false
+  },
+  "negatives": {
+    "clank": 0,
+    "hazard": 0
+  },
+  "deck_actions": {
+    "recycle": 0,
+    "stumble": 0
+  }
+}
