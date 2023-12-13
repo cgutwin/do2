@@ -1,6 +1,9 @@
 package ca.cgutwin.cards;
 
 import ca.cgutwin.cards.parser.json.*;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -71,21 +74,27 @@ public class Card {
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", Card.class.getSimpleName()+"{", "}").add("name="+name)
-                                                                      .add("type:"+type)
-                                                                      .add("price:"+price)
-                                                                      .add("rarity:"+rarity)
-                                                                      .add("limit:"+limit)
-                                                                      .add("extraPerks:"+extraPerks)
-                                                                      .add("queues:{"+queues+"}")
-                                                                      .add("effects:{"+effects+"}")
-                                                                      .add("negatives:{"+negatives+"}")
-                                                                      .add("deckActions:{"+deckActions+"}")
-                                                                      .toString();
+    return new StringJoiner(", ", Card.class.getSimpleName() + "{", "}").add("name=" + name)
+                                                                        .add("type:" + type)
+                                                                        .add("price:" + price)
+                                                                        .add("rarity:" + rarity)
+                                                                        .add("limit:" + limit)
+                                                                        .add("extraPerks:" + extraPerks)
+                                                                        .add("queues:{" + queues + "}")
+                                                                        .add("effects:{" + effects + "}")
+                                                                        .add("negatives:{" + negatives + "}")
+                                                                        .add("deckActions:{" + deckActions + "}")
+                                                                        .toString();
   }
 
   public int getLimit() {
     return limit;
+  }
+
+  public void render(SpriteBatch sb, int x, int y) {
+    Texture texture = new Texture("tileset/tileset.png");
+    TextureRegion region = new TextureRegion(texture, 128, 96, 8, 8);
+    sb.draw(region, x, y);
   }
 
   public static class Builder {

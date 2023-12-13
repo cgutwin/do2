@@ -17,6 +17,6 @@ public class CardFactory {
       card = new Card.Builder().withType(CardType.NORMAL);
     }
 
-    return card.withName(cardBuilder.nameBuilder).withPrice(cardBuilder.price).build();
+    return card.withName(cardBuilder.nameBuilder).build();
   }
 }
