@@ -1,0 +1,96 @@
+gold-ui.png
+size: 119, 46
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Slice 4
+  rotate: false
+  xy: 0, 0
+  size: 9, 23
+  orig: 9, 23
+  offset: 0, 0
+  index: -1
+Slice 8
+  rotate: false
+  xy: 9, 0
+  size: 10, 23
+  orig: 10, 23
+  offset: 0, 0
+  index: -1
+Slice 9
+  rotate: false
+  xy: 19, 0
+  size: 57, 23
+  orig: 57, 23
+  offset: 0, 0
+  index: -1
+Slice 10
+  rotate: false
+  xy: 76, 0
+  size: 33, 18
+  orig: 33, 18
+  offset: 0, 0
+  index: -1
+Slice 12
+  rotate: false
+  xy: 109, 0
+  size: 10, 18
+  orig: 10, 18
+  offset: 0, 0
+  index: -1
+Slice 11
+  rotate: false
+  xy: 0, 23
+  size: 12, 16
+  orig: 12, 16
+  offset: 0, 0
+  index: -1
+Slice 13
+  rotate: false
+  xy: 12, 23
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+Slice 1
+  rotate: false
+  xy: 44, 23
+  size: 10, 7
+  orig: 10, 7
+  offset: 0, 0
+  index: -1
+Slice 2
+  rotate: false
+  xy: 54, 23
+  size: 57, 7
+  orig: 57, 7
+  offset: 0, 0
+  index: -1
+Slice 3
+  rotate: false
+  xy: 0, 39
+  size: 9, 7
+  orig: 9, 7
+  offset: 0, 0
+  index: -1
+Slice 5
+  rotate: false
+  xy: 9, 39
+  size: 9, 7
+  orig: 9, 7
+  offset: 0, 0
+  index: -1
+Slice 6
+  rotate: false
+  xy: 18, 39
+  size: 57, 7
+  orig: 57, 7
+  offset: 0, 0
+  index: -1
+Slice 7
+  rotate: false
+  xy: 75, 39
+  size: 10, 7
+  orig: 10, 7
+  offset: 0, 0
+  index: -1

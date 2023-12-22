@@ -1,0 +1,7 @@
+menu.png
+size:64,32
+repeat:none
+button
+bounds:0,2,55,18
+split:33,10,1,1
+pad:33,10,1,1

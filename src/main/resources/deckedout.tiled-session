@@ -1,0 +1,128 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "crypt.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "DawnLike/tilesets/Objects/dawnlike-door-0.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "DawnLike/tilesets/Objects/dawnlike-door-1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "DawnLike/tilesets/Objects/dawnlike-floor.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "DawnLike/tilesets/Objects/dawnlike-ground-1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "DawnLike/tilesets/Objects/dawnlike-ground.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
+        },
+        "DawnLike/tilesets/Objects/dawnlike-hill.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "DawnLike/tilesets/Objects/dawnlike-pit.tsx": {
+            "scaleInDock": 1
+        },
+        "DawnLike/tilesets/Objects/dawnlike-wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "crypt.tmx": {
+            "expandedGroupLayers": [
+                15,
+                12
+            ],
+            "scale": 3,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 78.16666666666667,
+                "y": 90.5
+            }
+        },
+        "crypt.tmx#dalle": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
+        },
+        "crypt.tmx#snow-balls-wall-3": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "dalle.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "snow-balls-wall-2.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "snow-balls-wall-3.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 11
+        },
+        "snow-balls-wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 11,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Development/open/deckedout/src/main/resources",
+    "last.externalTilesetPath": "C:/Users/Chris/Downloads",
+    "last.imagePath": "//wsl.localhost/Ubuntu/home/cgutwin/Documents",
+    "lastUsedTilesetExportFilter": "All Files (*)",
+    "map.height": 300,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 300,
+    "openFiles": [
+        "crypt.tmx",
+        "snow-balls-wall-3.tsx",
+        "collision.tsx"
+    ],
+    "project": "deckedout.tiled-project",
+    "recentFiles": [
+        "collision.tsx",
+        "snow-balls-wall-3.tsx",
+        "crypt.tmx",
+        "dalle.tsx",
+        "snow-balls-wall.tsx",
+        "snow-balls-wall-2.tsx",
+        "DawnLike/tilesets/Objects/dawnlike-ground-1.tsx",
+        "DawnLike/tilesets/Objects/dawnlike-door-1.tsx",
+        "DawnLike/tilesets/Objects/dawnlike-door-0.tsx",
+        "DawnLike/tilesets/Objects/dawnlike-ground.tsx"
+    ],
+    "resizeMap.removeObjects": false,
+    "tileset.lastUsedFilter": "All Files (*)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.type": 1
+}

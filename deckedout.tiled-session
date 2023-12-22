@@ -1,11 +1,11 @@
 {
-    "activeFile": "src/main/resources/map.tmx",
+    "activeFile": "src/main/resources/ui_split.tsx",
     "expandedProjectPaths": [
         "src",
-        ".",
-        "target/classes",
         "src/main",
-        "src/main/resources"
+        ".",
+        "src/main/resources",
+        "target/classes"
     ],
     "fileStates": {
         "": {
@@ -19,6 +19,19 @@
                 "y": 113.25
             }
         },
+        "src/main/resources/Full Coins.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "src/main/resources/coin.tsx": {
+            "dynamicWrapping": false,
+            "scaleInEditor": 2
+        },
+        "src/main/resources/coins.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
         "src/main/resources/map.tmx": {
             "expandedGroupLayers": [
                 5
@@ -26,17 +39,22 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 131.66666666666666,
-                "y": 236.33333333333331
+                "x": 189,
+                "y": 159.5
             }
         },
         "src/main/resources/map.tmx#tileset2": {
+            "dynamicWrapping": false,
             "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "src/main/resources/tileset2.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "src/main/resources/ui_split.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
         },
         "tileset1.tsx": {
             "scaleInDock": 1,
@@ -47,17 +65,31 @@
             "scaleInEditor": 5.5
         }
     },
+    "last.imagePath": "C:/Development/open/deckedout/src/main/resources/tileset",
     "openFiles": [
-        "src/main/resources/map.tmx"
+        "src/main/resources/map.tmx",
+        "src/main/resources/ui_split.tsx"
     ],
     "project": "deckedout.tiled-project",
     "property.type": "bool",
     "recentFiles": [
         "src/main/resources/map.tmx",
+        "src/main/resources/ui_split.tsx",
+        "src/main/resources/coins.tsx",
+        "src/main/resources/Full Coins.tsx",
+        "src/main/resources/coin.tsx",
         "src/main/resources/tileset2.tsx",
         "map.tmx",
         "tileset2.tsx",
         "tileset1.tsx"
     ],
-    "resizeMap.removeObjects": true
+    "resizeMap.removeObjects": true,
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 5,
+    "tileset.spacing": 1,
+    "tileset.tileSize": {
+        "height": 10,
+        "width": 10
+    },
+    "tileset.type": 0
 }

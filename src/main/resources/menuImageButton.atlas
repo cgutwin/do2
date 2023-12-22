@@ -1,0 +1,7 @@
+menuImageButton.png
+size:256,128
+repeat:none
+button
+bounds:0,2,220,72
+split:33,10,1,1
+pad:33,10,1,1
