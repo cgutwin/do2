@@ -1,71 +1,79 @@
 package ca.cgutwin.deckedout;
 
-import ca.cgutwin.deckedout.core.WorldManager;
-import ca.cgutwin.deckedout.core.screens.WorldScreen;
-import ca.cgutwin.deckedout.ecs.entities.Player;
-import ca.cgutwin.deckedout.factories.Box2DBodyFactory;
-import ca.cgutwin.deckedout.factories.Box2DBodyFactoryImpl;
-import ca.cgutwin.deckedout.world.LevelManager;
-import ca.cgutwin.deckedout.world.MapManager;
-import ca.cgutwin.deckedout.world.MapRenderingSystem;
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.PooledEngine;
+import ca.cgutwin.deckedout.core.GameStateManager;
+import ca.cgutwin.deckedout.debug.DebugOverlay;
+import ca.cgutwin.deckedout.states.PlayState;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class DeckedOut extends Game {
-  private final WorldManager worldManager;
-  private final LevelManager levelManager;
-  private final MapManager mapManager;
-  private final Box2DBodyFactory bodyFactory;
-  private final MapRenderingSystem mapRenderer;
-  private final Engine engine;
-  private Player player;
-  private SpriteBatch spriteBatch;
+  private GameStateManager gsm;
+  private SpriteBatch batch;
+  private DebugOverlay debugOverlay;
 
   public DeckedOut() {
-    engine       = new PooledEngine();
-    worldManager = new WorldManager();
-    mapManager   = new MapManager();
-    levelManager = new LevelManager(mapManager);
-    mapRenderer  = new MapRenderingSystem(mapManager, new OrthographicCamera());
-    bodyFactory  = new Box2DBodyFactoryImpl(worldManager.world());
-  }
-
-  public Engine engine() {
-    return engine;
-  }
-
-  public Player player() {
-    return player;
+    super();
   }
 
   @Override
   public void create() {
-    spriteBatch = new SpriteBatch();
-    player      = new Player(bodyFactory, "img_1.png", 2, 2);
-    levelManager.loadLevel(LevelManager.LEVEL_ONE);
+    gsm          = new GameStateManager();
+    batch        = new SpriteBatch();
+    debugOverlay = new DebugOverlay(gsm);
 
-    setScreen(new WorldScreen(this));
+    gsm.push(new PlayState(this, gsm));
   }
 
   @Override
   public void dispose() {
     super.dispose();
-    spriteBatch.dispose();
+
+    gsm.pop();
+    debugOverlay.dispose();
+  }
+
+  @Override
+  public void pause() {
+    super.pause();
+  }
+
+  @Override
+  public void resume() {
+    super.resume();
   }
 
   @Override
   public void render() {
     super.render();
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT|GL20.GL_DEPTH_BUFFER_BIT);
+
+    if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
+      debugOverlay.toggleVisibility();
+    }
+    debugOverlay.render();
+
+    gsm.update(Gdx.graphics.getDeltaTime());
+    gsm.render();
   }
 
-  public SpriteBatch spriteBatch() {
-    return spriteBatch;
+  @Override
+  public void resize(int width, int height) {
+    super.resize(width, height);
+
+    debugOverlay.resize(width, height);
   }
 
-  public WorldManager worldManager() {
-    return worldManager;
+  @Override
+  public void setScreen(Screen screen) {
+    super.setScreen(screen);
+  }
+
+  @Override
+  public Screen getScreen() {
+    return super.getScreen();
   }
 }

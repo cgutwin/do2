@@ -1,6 +1,6 @@
 package ca.cgutwin;
 
-import ca.cgutwin.deckedout.MainGame;
+import ca.cgutwin.deckedout.DeckedOut;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -20,6 +20,6 @@ public class Main {
     config.setWindowedMode(800, 480);
     config.useVsync(true);
     config.setForegroundFPS(60);
-    new Lwjgl3Application(new MainGame(), config);
+    new Lwjgl3Application(new DeckedOut(), config);
   }
 }

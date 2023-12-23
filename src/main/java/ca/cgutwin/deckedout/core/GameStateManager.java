@@ -15,6 +15,10 @@ public class GameStateManager {
     states.push(state);
   }
 
+  public GameState peek() {
+    return states.peek();
+  }
+
   public void pop() {
     states.pop().dispose();
   }

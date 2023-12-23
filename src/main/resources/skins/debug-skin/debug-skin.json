@@ -1,0 +1,66 @@
+{
+  "BitmapFont": {
+    "Manrope-SemiBold": {
+      "file": "Manrope-SemiBold.fnt",
+      "scaledSize": -1,
+      "markupEnabled": false,
+      "flip": false
+    }
+  },
+  "Color": {
+    "RGBA_0_0_0_159": {
+      "hex": "0000009f"
+    },
+    "RGBA_0_0_0_255": {
+      "hex": "000000ff"
+    },
+    "RGBA_0_219_106_255": {
+      "hex": "00db6aff"
+    },
+    "RGBA_255_255_255_255": {
+      "hex": "ffffffff"
+    }
+  },
+  "TintedDrawable": {
+    "pixel": {
+      "name": "white-pixel",
+      "color": "RGBA_0_219_106_255",
+      "minWidth": 5,
+      "minHeight": 5
+    },
+    "scrollback": {
+      "name": "white-pixel",
+      "color": "RGBA_0_0_0_159"
+    }
+  },
+  "LabelStyle": {
+    "default": {
+      "font": "Manrope-SemiBold",
+      "fontColor": "RGBA_255_255_255_255"
+    }
+  },
+  "ListStyle": {
+    "default": {
+      "font": "Manrope-SemiBold",
+      "fontColorSelected": "RGBA_0_0_0_255",
+      "fontColorUnselected": "RGBA_255_255_255_255",
+      "selection": "pixel"
+    }
+  },
+  "ScrollPaneStyle": {
+    "default": {
+      "background": "scrollback"
+    }
+  },
+  "TextButtonStyle": {
+    "default": {
+      "font": "Manrope-SemiBold",
+      "fontColor": "RGBA_255_255_255_255"
+    }
+  },
+  "TextTooltipStyle": {
+    "default": {
+      "label": "default"
+    }
+  }
+}
