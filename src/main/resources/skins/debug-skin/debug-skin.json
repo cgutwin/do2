@@ -47,6 +47,11 @@
       "selection": "pixel"
     }
   },
+  "ProgressBarStyle": {
+    "default-horizontal": {
+      "background": "pixel"
+    }
+  },
   "ScrollPaneStyle": {
     "default": {
       "background": "scrollback"
