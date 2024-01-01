@@ -17,7 +17,7 @@ public class StatusBar {
   private final ProgressBar progressBar;
 
   public StatusBar(Skin skin, String styleName) {
-    progressBar = new ProgressBar(0, 100, 1, false, skin, styleName);
+    progressBar = new ProgressBar(0, 10, 1, false, skin, styleName);
   }
 
   // Getters and Setters

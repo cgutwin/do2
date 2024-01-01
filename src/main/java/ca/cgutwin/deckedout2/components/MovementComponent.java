@@ -11,24 +11,12 @@
 package ca.cgutwin.deckedout2.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Rectangle;
 
-public class PositionComponent implements Component {
-  private Vector2 position;
+public class MovementComponent implements Component {
+  public Rectangle bounds;
 
-  public PositionComponent(float x, float y) {
-    this.position = new Vector2(x, y);
-  }
-
-  public Vector2 position() {
-    return position;
-  }
-
-  public void setPosition(Vector2 position) {
-    this.position = position;
-  }
-
-  public void move(Vector2 ds) {
-    position.add(ds);
+  public MovementComponent(float x, float y, float width, float height) {
+    this.bounds = new Rectangle(x, y, width, height);
   }
 }

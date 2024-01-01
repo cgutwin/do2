@@ -5,10 +5,17 @@
     },
     "activeFile": "crypt.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Chris/Downloads/tilemap-wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
         },
         "DawnLike/tilesets/Objects/dawnlike-door-0.tsx": {
             "dynamicWrapping": false,
@@ -45,18 +52,20 @@
         "collision.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 3
         },
         "crypt.tmx": {
             "expandedGroupLayers": [
+                19,
                 15,
-                12
+                12,
+                23
             ],
-            "scale": 3,
-            "selectedLayer": 7,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 78.16666666666667,
-                "y": 90.5
+                "x": 137.25,
+                "y": 167.75
             }
         },
         "crypt.tmx#dalle": {
@@ -64,13 +73,27 @@
             "scaleInDock": 1,
             "scaleInEditor": 5.5
         },
+        "crypt.tmx#lighting": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "crypt.tmx#snow-balls-wall-3": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "crypt.tmx#tilemap-wall": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "dalle.tsx": {
             "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "lighting.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -82,40 +105,53 @@
         "snow-balls-wall-3.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
-            "scaleInEditor": 11
+            "scaleInEditor": 3
         },
         "snow-balls-wall.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 11,
             "scaleInEditor": 1
+        },
+        "tilemap-wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 3
         }
     },
     "last.exportedFilePath": "C:/Development/open/deckedout/src/main/resources",
     "last.externalTilesetPath": "C:/Users/Chris/Downloads",
-    "last.imagePath": "//wsl.localhost/Ubuntu/home/cgutwin/Documents",
+    "last.imagePath": "C:/Development/open/deckedout/src/main/resources",
+    "last.worldFilePath": "C:/Development/open/deckedout/src/main/resources",
     "lastUsedTilesetExportFilter": "All Files (*)",
+    "loadedWorlds": [
+        "C:/Development/open/deckedout/src/main/resources/world.world"
+    ],
     "map.height": 300,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "map.width": 300,
+    "mapScene.enableWorlds": true,
     "openFiles": [
         "crypt.tmx",
         "snow-balls-wall-3.tsx",
         "collision.tsx"
     ],
     "project": "deckedout.tiled-project",
+    "property.type": "float",
     "recentFiles": [
         "collision.tsx",
         "snow-balls-wall-3.tsx",
         "crypt.tmx",
+        "C:/Users/Chris/Downloads/tilemap-wall.tsx",
+        "lighting.tsx",
+        "tilemap-wall.tsx",
         "dalle.tsx",
         "snow-balls-wall.tsx",
         "snow-balls-wall-2.tsx",
         "DawnLike/tilesets/Objects/dawnlike-ground-1.tsx",
         "DawnLike/tilesets/Objects/dawnlike-door-1.tsx",
-        "DawnLike/tilesets/Objects/dawnlike-door-0.tsx",
-        "DawnLike/tilesets/Objects/dawnlike-ground.tsx"
+        "DawnLike/tilesets/Objects/dawnlike-door-0.tsx"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "All Files (*)",
@@ -124,5 +160,5 @@
         "height": 16,
         "width": 16
     },
-    "tileset.type": 1
+    "tileset.type": 0
 }

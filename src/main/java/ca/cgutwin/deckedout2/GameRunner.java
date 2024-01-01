@@ -19,7 +19,7 @@ public class GameRunner extends Game {
 
   @Override
   public void create() {
-    this.batch = new SpriteBatch();
+    batch = new SpriteBatch();
 
     setScreen(new TestScreen(this));
   }

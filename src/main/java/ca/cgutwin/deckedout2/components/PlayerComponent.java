@@ -8,6 +8,8 @@
  * For permission requests, write to the author at [chris@cgutwin.ca].
  */
 
-package ca.cgutwin.deckedout2.systems;
+package ca.cgutwin.deckedout2.components;
 
-public class test { }
+import com.badlogic.ashley.core.Component;
+
+public class PlayerComponent implements Component { }

@@ -11,21 +11,31 @@
 package ca.cgutwin.deckedout2.ui.hud;
 
 import ca.cgutwin.deckedout2.ui.hud.elements.StatusBar;
+import ca.cgutwin.deckedout2.world.WorldContext;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class HUD {
   private final Stage stage;
-  private final StatusBar healthBar;
+  private final StatusBar clankBar;
+  private final StatusBar hazardBar;
+  private final WorldContext context;
 
-  public HUD(Viewport viewport, Skin skin) {
+  public HUD(Viewport viewport, Skin skin, WorldContext context) {
+    this.context = context;
+
     stage = new Stage(viewport);
 
     // Initialize UI components
-    healthBar = new StatusBar(skin, "default-horizontal");
+    clankBar = new StatusBar(skin, "default-horizontal");
 
-    stage.addActor(healthBar.progressBar());
+    stage.addActor(clankBar.progressBar());
+    hazardBar = new StatusBar(skin, "default-horizontal");
+  }
+
+  public void update() {
+    clankBar.setValue(context.clank());
   }
 
   // Getters and Setters.
@@ -34,7 +44,7 @@ public class HUD {
     return stage;
   }
 
-  public StatusBar healthBar() {
-    return healthBar;
+  public StatusBar clankBar() {
+    return clankBar;
   }
 }

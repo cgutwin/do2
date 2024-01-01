@@ -1,0 +1,13 @@
+{
+    "maps": [
+        {
+            "fileName": "crypt.tmx",
+            "height": 320,
+            "width": 320,
+            "x": -48,
+            "y": 0
+        }
+    ],
+    "onlyShowAdjacentMaps": false,
+    "type": "world"
+}

@@ -10,25 +10,12 @@
 
 package ca.cgutwin.deckedout2.components;
 
+import ca.cgutwin.deckedout2.utils.commands.Command;
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
 
-public class PositionComponent implements Component {
-  private Vector2 position;
+import java.util.HashMap;
+import java.util.Map;
 
-  public PositionComponent(float x, float y) {
-    this.position = new Vector2(x, y);
-  }
-
-  public Vector2 position() {
-    return position;
-  }
-
-  public void setPosition(Vector2 position) {
-    this.position = position;
-  }
-
-  public void move(Vector2 ds) {
-    position.add(ds);
-  }
+public class InputComponent implements Component {
+  public Map<Integer, Command> keyCommands = new HashMap<>();
 }

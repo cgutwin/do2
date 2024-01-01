@@ -11,24 +11,16 @@
 package ca.cgutwin.deckedout2.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
 
-public class PositionComponent implements Component {
-  private Vector2 position;
+public class ClankComponent implements Component {
+  private float clankValue = 0.0f;
 
-  public PositionComponent(float x, float y) {
-    this.position = new Vector2(x, y);
+  // Method to increase clank, could be more complex depending on your game logic
+  public void increaseClank(float amount) {
+    clankValue += amount;
   }
 
-  public Vector2 position() {
-    return position;
-  }
-
-  public void setPosition(Vector2 position) {
-    this.position = position;
-  }
-
-  public void move(Vector2 ds) {
-    position.add(ds);
+  public float clankValue() {
+    return clankValue;
   }
 }

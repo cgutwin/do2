@@ -31,6 +31,12 @@
     "scrollback": {
       "name": "white-pixel",
       "color": "RGBA_0_0_0_159"
+    },
+    "before": {
+      "name": "white-pixel",
+      "color": "RGBA_255_255_255_255",
+      "minWidth": 5,
+      "minHeight": 5
     }
   },
   "LabelStyle": {
@@ -49,7 +55,8 @@
   },
   "ProgressBarStyle": {
     "default-horizontal": {
-      "background": "pixel"
+      "background": "pixel",
+      "knobBefore": "before"
     }
   },
   "ScrollPaneStyle": {
