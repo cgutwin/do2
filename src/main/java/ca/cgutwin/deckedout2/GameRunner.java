@@ -10,7 +10,7 @@
 
 package ca.cgutwin.deckedout2;
 
-import ca.cgutwin.deckedout2.screens.TestScreen;
+import ca.cgutwin.deckedout2.screens.GameScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -20,8 +20,7 @@ public class GameRunner extends Game {
   @Override
   public void create() {
     batch = new SpriteBatch();
-
-    setScreen(new TestScreen(this));
+    setScreen(new GameScreen());
   }
 
   @Override
