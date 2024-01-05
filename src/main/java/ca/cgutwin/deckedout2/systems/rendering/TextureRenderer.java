@@ -10,24 +10,35 @@
 
 package ca.cgutwin.deckedout2.systems.rendering;
 
-import ca.cgutwin.deckedout2.components.PositionComponent;
 import ca.cgutwin.deckedout2.components.TextureComponent;
+import ca.cgutwin.deckedout2.components.TransformationComponent;
+import ca.cgutwin.deckedout2.components.b2d.BodyComponent;
+import ca.cgutwin.deckedout2.utils.Coordinates;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 
 public class TextureRenderer implements EntityRenderer {
   private final ComponentMapper<TextureComponent> textureMapper = ComponentMapper.getFor(TextureComponent.class);
-  private final ComponentMapper<PositionComponent> positionMapper = ComponentMapper.getFor(PositionComponent.class);
+  private final ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
+  private final ComponentMapper<TransformationComponent> positionMapper = ComponentMapper.getFor(
+          TransformationComponent.class);
 
   @Override
   public void render(Entity entity, SpriteBatch spriteBatch) {
     TextureComponent textureComp = textureMapper.get(entity);
-    PositionComponent positionComp = positionMapper.get(entity);
+    TransformationComponent positionComp = positionMapper.get(entity);
+    BodyComponent bodyComp = bodyMapper.get(entity);
 
-    if (textureComp.texture() != null) {
-      spriteBatch.draw(new TextureRegion(textureComp.texture()), positionComp.position().x, positionComp.position().y);
+    if (textureComp.texture != null) {
+      Sprite sprite = new Sprite(textureComp.texture);
+      Coordinates coordinates = new Coordinates(bodyComp.body.getPosition());
+
+      sprite.setPosition(coordinates.x(), coordinates.y());
+      sprite.setRotation(bodyComp.body.getAngle()*MathUtils.radiansToDegrees);
+      sprite.draw(spriteBatch);
     }
   }
 }

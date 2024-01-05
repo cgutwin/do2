@@ -18,8 +18,8 @@ public class Main {
     Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
     config.setTitle("Decked Out");
     config.setWindowedMode(800, 480);
-    config.useVsync(true);
-    config.setForegroundFPS(60);
+    //    config.useVsync(true);
+    //    config.setForegroundFPS(60);
     new Lwjgl3Application(new GameRunner(), config);
   }
 }

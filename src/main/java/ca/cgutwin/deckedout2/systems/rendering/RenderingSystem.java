@@ -10,8 +10,7 @@
 
 package ca.cgutwin.deckedout2.systems.rendering;
 
-import ca.cgutwin.deckedout2.components.PositionComponent;
-import ca.cgutwin.deckedout2.components.TextureComponent;
+import ca.cgutwin.deckedout2.components.PlayerComponent;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
@@ -30,7 +29,7 @@ public class RenderingSystem extends EntitySystem {
 
   @Override
   public void addedToEngine(com.badlogic.ashley.core.Engine engine) {
-    entities = engine.getEntitiesFor(Family.all(TextureComponent.class, PositionComponent.class).get());
+    entities = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
   }
 
   @Override

@@ -8,8 +8,14 @@
  * For permission requests, write to the author at [chris@cgutwin.ca].
  */
 
-package ca.cgutwin.deckedout2.components;
+package ca.cgutwin.deckedout2.components.b2d;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Entity;
 
-public class PlayerComponent implements Component { }
+/*
+ * Stores collision data such as entity that this entity has collided with
+ */
+public class CollisionComponent implements Component {
+  public Entity collisionEntity;
+}

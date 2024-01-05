@@ -69,7 +69,7 @@ public class TestScreen implements Screen {
     cameraManager   = new CameraManager(800, 480);
     engine          = new PooledEngine();
     eventManager    = new EventManager();
-    player          = new Player(engine, levelManager.currentLevel());
+    player          = new Player(engine);
     textureRenderer = new TextureRenderer();
 
     clankSystem  = new ClankSystem(worldContext);

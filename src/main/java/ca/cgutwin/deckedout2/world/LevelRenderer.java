@@ -29,7 +29,7 @@ import java.util.List;
 
 public class LevelRenderer {
   private final TiledMap tiledMap;
-  private final MapProperties prop;
+  private final MapProperties props;
   private final OrthogonalTiledMapRenderer mapRenderer;
 
   //  Lighting Rendering
@@ -45,8 +45,8 @@ public class LevelRenderer {
 
     /* Map setup */
     this.tiledMap    = tiledMap;
-    prop             = this.tiledMap.getProperties();
-    this.mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+    props            = this.tiledMap.getProperties();
+    this.mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1f);
 
     /* LIGHTING */
     pixel = generatePixel(1, 1, Color.WHITE);
@@ -56,8 +56,8 @@ public class LevelRenderer {
     lightbatch.disableBlending();
 
     // Light FrameBuffer
-    lightingFrameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, prop.get("width", Integer.class),
-                                          prop.get("height", Integer.class), false);
+    lightingFrameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, props.get("width", Integer.class),
+                                          props.get("height", Integer.class), false);
     lightingTiles       = generateLightingTiles(tiledMap.getTileSets().getTileSet("lighting"));
     setupLightingLayer();
   }
@@ -77,8 +77,9 @@ public class LevelRenderer {
   }
 
   private void setupLightingLayer() {
-    lightingLayer = new TiledMapTileLayer(prop.get("width", Integer.class), prop.get("height", Integer.class),
-                                          prop.get("tilewidth", Integer.class), prop.get("tileheight", Integer.class));
+    lightingLayer = new TiledMapTileLayer(props.get("width", Integer.class), props.get("height", Integer.class),
+                                          props.get("tilewidth", Integer.class),
+                                          props.get("tileheight", Integer.class));
     tiledMap.getLayers().add(lightingLayer);
   }
 
@@ -116,7 +117,7 @@ public class LevelRenderer {
   }
 
   // calculates lighting average for this one specific tile according to https://gamedev.stackexchange.com/a/126165
-  // calculate by how many tiles the current tile is surrounded. coords outside of the map also count as tiles
+  // calculate by how many tiles the current tile is surrounded. co-ords outside the map also count as tiles
   private float calculateAverageLightingOfTile(TiledMapTileLayer layer, int x, int y) {
     int averageSum = 0;
     for (int dY = y - 1; dY <= y + 1; dY++) {

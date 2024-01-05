@@ -10,12 +10,16 @@
 
 package ca.cgutwin.deckedout2.utils;
 
+import ca.cgutwin.deckedout2.utils.physics.mapbody.BodyFactory;
+import ca.cgutwin.deckedout2.utils.physics.mapbody.EllipseBodyFactory;
+import ca.cgutwin.deckedout2.utils.physics.mapbody.PolygonBodyFactory;
+import ca.cgutwin.deckedout2.utils.physics.mapbody.RectangleBodyFactory;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
@@ -31,6 +35,9 @@ import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.StaticBody;
 public class MapBodyBuilder {
   private final World world;
   private final float tileSize;
+  private final BodyFactory rectangleBodyFactory;
+  private final BodyFactory ellipseBodyFactory;
+  private final BodyFactory polygonBodyFactory;
 
   /**
    * Constructor for MapBodyBuilder.
@@ -41,6 +48,10 @@ public class MapBodyBuilder {
   public MapBodyBuilder(World world, float tileSize) {
     this.world    = world;
     this.tileSize = tileSize;
+
+    rectangleBodyFactory = new RectangleBodyFactory(world, tileSize);
+    ellipseBodyFactory   = new EllipseBodyFactory(world, tileSize);
+    polygonBodyFactory   = new PolygonBodyFactory(world, tileSize);
   }
 
   /**
@@ -50,26 +61,88 @@ public class MapBodyBuilder {
    * @param x    The x-coordinate of the cell in the map.
    * @param y    The y-coordinate of the cell in the map.
    */
-  public void createBody(TiledMapTileLayer.Cell cell, int x, int y) {
+  public void createBody(Cell cell, int x, int y) {
     if (cell == null) { return; }
 
+    Coordinates coordinates = new Coordinates(x, y);
     MapObjects objects = cell.getTile().getObjects();
     if (objects.getCount() != 1) { return; }
 
     MapObject object = objects.get(0);
 
-    switch (object) {
-      case RectangleMapObject rectangleMapObject -> createRectangleBody(rectangleMapObject, x, y);
-      case EllipseMapObject ellipseMapObject -> createEllipseBody(ellipseMapObject, x, y);
-      case PolygonMapObject polygonMapObject -> createPolygonBody(polygonMapObject, x, y);
-      case null, default -> {
-      }
+    if (object instanceof RectangleMapObject) {
+      //      createRectangleBody((RectangleMapObject) object, (int) coordinates.x(), (int) coordinates.y());
+      rectangleBodyFactory.createBody(object, coordinates);
+    }
+    else if (object instanceof EllipseMapObject) {
+      //      createEllipseBody((EllipseMapObject) object, (int) coordinates.x(), (int) coordinates.y());
+      ellipseBodyFactory.createBody(object, coordinates);
+    }
+    else if (object instanceof PolygonMapObject) {
+      //      createPolygonBody((PolygonMapObject) object, (int) coordinates.x(), (int) coordinates.y());
+      polygonBodyFactory.createBody(object, coordinates);
     }
   }
 
   // The following methods implement the specifics of creating Box2D bodies
   // for different shapes (rectangle, ellipse, and polygon) based on the
   // properties of the map objects.
+
+  /**
+   * Creates a circular Box2D body from a EllipseMapObject.
+   * <p>
+   * This method sets up a body definition, calculates the position,
+   * and creates a circular shape in the Box2D world.
+   *
+   * @param ellipseObject The EllipseMapObject from the Tiled map.
+   * @param x             The x-coordinate of the cell in the map.
+   * @param y             The y-coordinate of the cell in the map.
+   * @throws IllegalArgumentException Only circles are allowed.
+   */
+  private void createEllipseBody(EllipseMapObject ellipseObject, int x, int y) throws IllegalArgumentException {
+    Ellipse ellipse = ellipseObject.getEllipse();
+
+    /*
+    Configures the BodyDef for an ellipse.
+
+    The position is calculated based on the tile's location and the ellipse's offset within the tile.
+    - (x*tileSize + tileSize/2f + ellipse.x): Computes the central X-coordinate of the ellipse, factoring in the tile's position and ellipse's offset.
+    - (y*tileSize + tileSize/2f + ellipse.y): Similar computation for the central Y-coordinate.
+    */
+    BodyDef bodyDef = getBodyDef(x*tileSize + tileSize/2f + ellipse.x, y*tileSize + tileSize/2f + ellipse.y);
+
+    if (ellipse.width != ellipse.height) { throw new IllegalArgumentException("Only circles are allowed."); }
+
+    Body body = world.createBody(bodyDef);
+
+    CircleShape circleShape = new CircleShape();
+    circleShape.setRadius(ellipse.width/2f);
+
+    body.createFixture(circleShape, 0.0f);
+    circleShape.dispose();
+  }
+
+  /**
+   * Creates a new BodyDef with specified position coordinates.
+   * <p>
+   * This method initializes a BodyDef object, a core component in Box2D for defining bodies.
+   * <ul>
+   *   <li>Sets the body type to StaticBody, meaning this body won't be affected by physics like gravity but can interact with other moving bodies.</li>
+   *   <li>The position is set based on the passed x and y coordinates, determining where in the Box2D world the body will be placed.</li>
+   * </ul>
+   *
+   * @param x The x-coordinate in the Box2D world.
+   * @param y The y-coordinate in the Box2D world.
+   * @return A configured BodyDef object.
+   */
+  private BodyDef getBodyDef(float x, float y) {
+    BodyDef bodyDef = new BodyDef();
+
+    bodyDef.type = StaticBody;
+    bodyDef.position.set(x, y);
+
+    return bodyDef;
+  }
 
   /**
    * Creates a rectangular Box2D body from a RectangleMapObject.
@@ -109,42 +182,8 @@ public class MapBodyBuilder {
     PolygonShape polygonShape = new PolygonShape(); // Defines a polygon shape for the rectangle
     polygonShape.setAsBox(rectangle.getWidth()/2f, rectangle.getHeight()/2f);
 
-    body.createFixture(polygonShape, 0.0f); // Attaches the shape to the body
+    body.createFixture(polygonShape, 0.0f);// Attaches the shape to the body
     polygonShape.dispose();
-  }
-
-  /**
-   * Creates a circular Box2D body from a EllipseMapObject.
-   * <p>
-   * This method sets up a body definition, calculates the position,
-   * and creates a circular shape in the Box2D world.
-   *
-   * @param ellipseObject The EllipseMapObject from the Tiled map.
-   * @param x             The x-coordinate of the cell in the map.
-   * @param y             The y-coordinate of the cell in the map.
-   * @throws IllegalArgumentException Only circles are allowed.
-   */
-  private void createEllipseBody(EllipseMapObject ellipseObject, int x, int y) throws IllegalArgumentException {
-    Ellipse ellipse = ellipseObject.getEllipse();
-
-    /*
-    Configures the BodyDef for an ellipse.
-
-    The position is calculated based on the tile's location and the ellipse's offset within the tile.
-    - (x*tileSize + tileSize/2f + ellipse.x): Computes the central X-coordinate of the ellipse, factoring in the tile's position and ellipse's offset.
-    - (y*tileSize + tileSize/2f + ellipse.y): Similar computation for the central Y-coordinate.
-    */
-    BodyDef bodyDef = getBodyDef(x*tileSize + tileSize/2f + ellipse.x, y*tileSize + tileSize/2f + ellipse.y);
-
-    if (ellipse.width != ellipse.height) { throw new IllegalArgumentException("Only circles are allowed."); }
-
-    Body body = world.createBody(bodyDef);
-
-    CircleShape circleShape = new CircleShape();
-    circleShape.setRadius(ellipse.width/2f);
-
-    body.createFixture(circleShape, 0.0f);
-    circleShape.dispose();
   }
 
   /**
@@ -176,27 +215,5 @@ public class MapBodyBuilder {
 
     body.createFixture(polygonShape, 0.0f);
     polygonShape.dispose();
-  }
-
-  /**
-   * Creates a new BodyDef with specified position coordinates.
-   * <p>
-   * This method initializes a BodyDef object, a core component in Box2D for defining bodies.
-   * <ul>
-   *   <li>Sets the body type to StaticBody, meaning this body won't be affected by physics like gravity but can interact with other moving bodies.</li>
-   *   <li>The position is set based on the passed x and y coordinates, determining where in the Box2D world the body will be placed.</li>
-   * </ul>
-   *
-   * @param x The x-coordinate in the Box2D world.
-   * @param y The y-coordinate in the Box2D world.
-   * @return A configured BodyDef object.
-   */
-  private BodyDef getBodyDef(float x, float y) {
-    BodyDef bodyDef = new BodyDef();
-
-    bodyDef.type = StaticBody;
-    bodyDef.position.set(x, y);
-
-    return bodyDef;
   }
 }

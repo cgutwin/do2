@@ -10,38 +10,23 @@
 
 package ca.cgutwin.deckedout2.utils.commands.movement;
 
-import ca.cgutwin.deckedout2.components.PositionComponent;
-import ca.cgutwin.deckedout2.events.ClankEvent;
-import ca.cgutwin.deckedout2.events.EventManager;
+import ca.cgutwin.deckedout2.components.b2d.BodyComponent;
 import ca.cgutwin.deckedout2.utils.commands.Command;
-import ca.cgutwin.deckedout2.world.Level;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 
 public class MovementCommand implements Command {
   private final Vector2 ds;
-  private final Level level;
 
-  public MovementCommand(Vector2 ds, Level level) {
-    this.level = level;
-    this.ds    = ds;
-  }
-
-  public MovementCommand(int x, int y, Level level) {
-    this.level = level;
-    this.ds    = new Vector2(x, y);
+  public MovementCommand(int x, int y) {
+    this.ds = new Vector2(x, y).nor();
   }
 
   @Override
   public void execute(Entity entity) {
-    PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
-    Vector2 newPosition = new Vector2(positionComponent.position());
+    BodyComponent bodyComponent = entity.getComponent(BodyComponent.class);
 
-    newPosition.add(ds);
-
-    if (level.isTileWalkable(newPosition)) {
-      EventManager.publishEvery(5, new ClankEvent());
-      entity.getComponent(PositionComponent.class).move(ds);
-    }
+    Vector2 linearVelocity = bodyComponent.body.getLinearVelocity();
+    bodyComponent.body.setLinearVelocity(linearVelocity.add(ds));
   }
 }

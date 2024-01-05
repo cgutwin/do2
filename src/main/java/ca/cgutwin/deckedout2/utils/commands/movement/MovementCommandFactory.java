@@ -11,16 +11,15 @@
 package ca.cgutwin.deckedout2.utils.commands.movement;
 
 import ca.cgutwin.deckedout2.utils.commands.Command;
-import ca.cgutwin.deckedout2.world.Level;
 
 public class MovementCommandFactory {
-
-  public static Command newMovementCommand(MovementEnum direction, Level level) {
+  public static Command newMovementCommand(MovementEnum direction) {
+    // Normalize to maintain constant speed
     return switch (direction) {
-      case UP -> new MovementCommand(0, 1, level);
-      case DOWN -> new MovementCommand(0, -1, level);
-      case LEFT -> new MovementCommand(-1, 0, level);
-      case RIGHT -> new MovementCommand(1, 0, level);
+      case UP -> new MovementCommand(0, 1);
+      case DOWN -> new MovementCommand(0, -1);
+      case LEFT -> new MovementCommand(-1, 0);
+      case RIGHT -> new MovementCommand(1, 0);
     };
   }
 }

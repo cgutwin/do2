@@ -10,25 +10,13 @@
 
 package ca.cgutwin.deckedout2.components;
 
+import ca.cgutwin.deckedout2.utils.Coordinates;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
 
-public class PositionComponent implements Component {
-  private Vector2 position;
-
-  public PositionComponent(float x, float y) {
-    this.position = new Vector2(x, y);
-  }
-
-  public Vector2 position() {
-    return position;
-  }
-
-  public void setPosition(Vector2 position) {
-    this.position = position;
-  }
-
-  public void move(Vector2 ds) {
-    position.add(ds);
-  }
+public class TransformationComponent implements Component {
+  public final Vector2 scale = new Vector2(16.0f, 16.0f);
+  public Coordinates position = new Coordinates();
+  public float rotation = 0.0f;
+  public boolean isHidden = false;
 }

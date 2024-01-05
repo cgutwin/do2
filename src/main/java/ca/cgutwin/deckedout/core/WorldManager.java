@@ -7,7 +7,7 @@ public class WorldManager {
   private final World world;
 
   public WorldManager() {
-    world = new World(new Vector2(0, 0), true); // Set gravity
+    world = new World(new Vector2(0, 0), true);
   }
 
   public World world() {

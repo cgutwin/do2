@@ -12,7 +12,7 @@ package ca.cgutwin.deckedout2.utils;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class CameraManager {
@@ -36,7 +36,7 @@ public class CameraManager {
 
   private void initializeCamera() {
     camera   = new OrthographicCamera();
-    viewport = new ExtendViewport(worldWidth, worldHeight, camera);
+    viewport = new FillViewport(worldWidth, worldHeight, camera);
     camera.position.set(worldWidth/2f, worldHeight/2f, 0);
     //    camera.zoom = 0.5F;
     camera.update();

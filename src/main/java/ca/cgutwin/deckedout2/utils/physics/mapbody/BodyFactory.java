@@ -8,8 +8,11 @@
  * For permission requests, write to the author at [chris@cgutwin.ca].
  */
 
-package ca.cgutwin.deckedout2.components;
+package ca.cgutwin.deckedout2.utils.physics.mapbody;
 
-import com.badlogic.ashley.core.Component;
+import ca.cgutwin.deckedout2.utils.Coordinates;
+import com.badlogic.gdx.maps.MapObject;
 
-public class PlayerComponent implements Component { }
+public interface BodyFactory {
+  void createBody(MapObject object, Coordinates coordinates);
+}

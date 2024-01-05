@@ -8,8 +8,11 @@
  * For permission requests, write to the author at [chris@cgutwin.ca].
  */
 
-package ca.cgutwin.deckedout2.components;
+package ca.cgutwin.deckedout2.components.b2d;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.physics.box2d.Body;
 
-public class PlayerComponent implements Component { }
+public class BodyComponent implements Component {
+  public Body body;
+}

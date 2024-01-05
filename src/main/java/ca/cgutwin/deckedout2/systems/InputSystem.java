@@ -12,28 +12,30 @@ package ca.cgutwin.deckedout2.systems;
 
 import ca.cgutwin.deckedout2.components.InputComponent;
 import ca.cgutwin.deckedout2.utils.commands.Command;
-import com.badlogic.ashley.core.*;
-import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 
-public class InputSystem extends EntitySystem {
+public class InputSystem extends IteratingSystem {
   private final ComponentMapper<InputComponent> inputMapper = ComponentMapper.getFor(InputComponent.class);
-  private ImmutableArray<Entity> entities;
+  private final List<Entity> entitiesQueue;
 
   public InputSystem() {
-    // Define the family of entities this system processes
+    super(Family.all(InputComponent.class).get());
+    this.entitiesQueue = new ArrayList<>();
   }
 
   @Override
-  public void addedToEngine(Engine engine) {
-    entities = engine.getEntitiesFor(Family.all(InputComponent.class).get());
-  }
+  public void update(float dt) {
+    super.update(dt);
 
-  @Override
-  public void update(float deltaTime) {
-    for (Entity entity: entities) {
+    for (Entity entity: entitiesQueue) {
       InputComponent input = inputMapper.get(entity);
       for (Entry<Integer, Command> entry: input.keyCommands.entrySet()) {
         if (Gdx.input.isKeyPressed(entry.getKey())) {
@@ -41,5 +43,10 @@ public class InputSystem extends EntitySystem {
         }
       }
     }
+  }
+
+  @Override
+  protected void processEntity(Entity entity, float v) {
+    entitiesQueue.add(entity);
   }
 }
