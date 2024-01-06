@@ -14,6 +14,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class DungeonScreen implements Screen
 {
@@ -22,6 +24,7 @@ public class DungeonScreen implements Screen
   GameRunner parent;
   MapLoader mapLoader;
   OrthographicCamera camera;
+  Viewport viewport;
 
 
   public DungeonScreen(GameRunner parent) {
@@ -32,8 +35,8 @@ public class DungeonScreen implements Screen
     worldRenderer = new Box2DDebugRenderer();
 
 
-    camera = new OrthographicCamera();
-    camera.setToOrtho(false, 800, 480);
+    camera   = new OrthographicCamera();
+    viewport = new ExtendViewport(10*32, 10*32, camera);
     camera.update();
 
     parent.engine().addSystem(new PhysicsSystem(parent.world()));
@@ -55,8 +58,8 @@ public class DungeonScreen implements Screen
     Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-    parent.engine().update(delta);
+    viewport.apply(true);
+    parent.sb().setProjectionMatrix(camera.combined);
 
     worldRenderer.render(parent.world(), camera.combined);
     mapRenderer.render();
@@ -65,7 +68,7 @@ public class DungeonScreen implements Screen
 
   @Override
   public void resize(int width, int height) {
-
+    viewport.update(width, height);
   }
 
   @Override

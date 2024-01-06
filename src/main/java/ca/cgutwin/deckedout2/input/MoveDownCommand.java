@@ -8,6 +8,6 @@ public class MoveDownCommand implements Command
   @Override
   public void execute(Body body) {
     Vector2 position = body.getPosition();
-    body.applyLinearImpulse(new Vector2(0f, -1f), position, true);
+    body.applyLinearImpulse(new Vector2(0f, -5f), position, true);
   }
 }

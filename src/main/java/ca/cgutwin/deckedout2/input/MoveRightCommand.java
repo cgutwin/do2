@@ -8,6 +8,6 @@ public class MoveRightCommand implements Command
   @Override
   public void execute(Body body) {
     Vector2 position = body.getPosition();
-    body.applyLinearImpulse(new Vector2(1f, 0), position, true);
+    body.applyLinearImpulse(new Vector2(5f, 0), position, true);
   }
 }
