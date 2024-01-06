@@ -13,6 +13,7 @@ public class RenderingSystem extends EntitySystem
 
   public RenderingSystem(SpriteBatch spriteBatch) {
     this.spriteBatch = spriteBatch;
+
     renderableMapper = ComponentMapper.getFor(RenderableComponent.class);
   }
 
@@ -31,6 +32,7 @@ public class RenderingSystem extends EntitySystem
         renderable.renderer.render(entity, spriteBatch);
       }
     }
+
     spriteBatch.end();
   }
 }

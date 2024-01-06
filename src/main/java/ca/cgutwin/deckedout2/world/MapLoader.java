@@ -2,11 +2,14 @@ package ca.cgutwin.deckedout2.world;
 
 import ca.cgutwin.deckedout2.rendering.components.RenderableComponent;
 import ca.cgutwin.deckedout2.rendering.components.TextureComponent;
+import ca.cgutwin.deckedout2.rendering.renderers.MapRenderer;
 import ca.cgutwin.deckedout2.rendering.renderers.TileEntityRenderer;
 import ca.cgutwin.deckedout2.util.DebugSystem;
+import ca.cgutwin.deckedout2.world.components.MapComponent;
 import ca.cgutwin.deckedout2.world.components.TileComponent;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -17,27 +20,34 @@ public class MapLoader
 {
   private final TmxMapLoader mapLoader;
   private final Engine engine;
-  private TiledMap map;
+  private final Camera camera;
 
-  public MapLoader(Engine engine, String pathToMap) {
-    this(engine);
+  public MapLoader(Engine engine, Camera camera, String pathToMap) {
+    this(engine, camera);
     loadMap(pathToMap);
   }
 
-  public MapLoader(Engine engine) {
+  public MapLoader(Engine engine, Camera camera) {
     this.engine = engine;
+    this.camera = camera;
     mapLoader   = new TmxMapLoader();
   }
 
   public void loadMap(String pathToMap) {
     DebugSystem.getInstance().sout("loading map");
 
-    map = mapLoader.load(pathToMap);
+    Entity mapEntity = new Entity();
 
-    if (map != null) { DebugSystem.getInstance().sout("loaded " + map); }
+    MapComponent mapComponent = engine.createComponent(MapComponent.class);
+    mapComponent.map = mapLoader.load(pathToMap);
+    mapEntity.add(mapComponent);
+    RenderableComponent renderableComponent = new RenderableComponent(new MapRenderer());
+    renderableComponent.camera = camera;
+    mapEntity.add(renderableComponent);
 
-    assert map != null;
-    processMapLayers(map);
+    engine.addEntity(mapEntity);
+
+    processMapLayers(mapComponent.map);
   }
 
   private void processMapLayers(TiledMap map) {
@@ -78,9 +88,5 @@ public class MapLoader
 
     engine.addEntity(tileEntity);
     DebugSystem.getInstance().sout("added entity: " + tileEntity);
-  }
-
-  public TiledMap map() {
-    return map;
   }
 }

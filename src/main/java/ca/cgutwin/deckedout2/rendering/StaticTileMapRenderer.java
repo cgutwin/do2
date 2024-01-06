@@ -1,12 +1,16 @@
-package ca.cgutwin.deckedout2.world;
+package ca.cgutwin.deckedout2.rendering;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class MapRenderer extends OrthogonalTiledMapRenderer
+public class StaticTileMapRenderer extends OrthogonalTiledMapRenderer
 {
-  public MapRenderer(TiledMap map) {
+  public StaticTileMapRenderer() {
+    this(null);
+  }
+
+  public StaticTileMapRenderer(TiledMap map) {
     super(map, 32);
   }
 
