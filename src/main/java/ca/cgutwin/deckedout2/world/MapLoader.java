@@ -1,5 +1,7 @@
 package ca.cgutwin.deckedout2.world;
 
+import ca.cgutwin.deckedout2.physics.collisions.handlers.DefaultCollisionHandler;
+import ca.cgutwin.deckedout2.physics.components.CollisionComponent;
 import ca.cgutwin.deckedout2.rendering.RenderComponent;
 import ca.cgutwin.deckedout2.util.DebugSystem;
 import ca.cgutwin.deckedout2.world.components.TileComponent;
@@ -69,9 +71,11 @@ public class MapLoader
 
     TileComponent tileComponent = new TileComponent(TileTypeEnum.valueOf(tileType), new Position(x, y));
     RenderComponent renderComponent = new RenderComponent(cell.getTile().getTextureRegion());
+    CollisionComponent collisionComponent = new CollisionComponent(new DefaultCollisionHandler());
 
     tileEntity.add(tileComponent);
     tileEntity.add(renderComponent);
+    tileEntity.add(collisionComponent);
 
     engine.addEntity(tileEntity);
     DebugSystem.getInstance().sout("added entity: " + tileEntity);

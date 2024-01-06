@@ -1,6 +1,8 @@
 package ca.cgutwin.deckedout2.screens;
 
 import ca.cgutwin.deckedout2.GameRunner;
+import ca.cgutwin.deckedout2.physics.PhysicsSystem;
+import ca.cgutwin.deckedout2.physics.collisions.CollisionSystem;
 import ca.cgutwin.deckedout2.rendering.TileEntityRenderingSystem;
 import ca.cgutwin.deckedout2.world.MapLoader;
 import ca.cgutwin.deckedout2.world.MapRenderer;
@@ -26,6 +28,8 @@ public class DungeonScreen implements Screen
     camera.update();
 
     parent.engine().addSystem(new TileEntityRenderingSystem(parent.sb()));
+    parent.engine().addSystem(new PhysicsSystem(parent.world()));
+    parent.engine().addSystem(new CollisionSystem(parent.world()));
   }
 
   @Override

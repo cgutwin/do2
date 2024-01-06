@@ -1,28 +1,35 @@
 package ca.cgutwin.deckedout2.physics;
 
 import ca.cgutwin.deckedout2.physics.components.BodyComponent;
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-
-import java.util.ArrayList;
 
 public class PhysicsSystem extends IntervalIteratingSystem
 {
-  public static final float PHYSICS_STEP_TIME = 1/60f;
+  public static final float TIME_STEP = 1/60f; // Update at 60 Hz
+  private final ComponentMapper<BodyComponent> bodyMapper;
   private final World world;
-  ArrayList<Entity> entityQueue;
 
-  public PhysicsSystem(World world, float interval) {
-    super(Family.all(BodyComponent.class).get(), interval);
+  public PhysicsSystem(World world) {
+    super(Family.all(BodyComponent.class).get(), TIME_STEP);
 
-    this.world       = world;
-    this.entityQueue = new ArrayList<>();
+    this.world      = world;
+    this.bodyMapper = ComponentMapper.getFor(BodyComponent.class);
+  }
+
+  @Override
+  protected void updateInterval() {
+    // Step the physics world
+    world.step(TIME_STEP, 6, 2);
   }
 
   @Override
   protected void processEntity(Entity entity) {
-    System.out.println("entity = " + entity);
+    BodyComponent physicsComponent = bodyMapper.get(entity);
+    Body body = physicsComponent.body;
   }
 }
