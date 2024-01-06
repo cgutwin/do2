@@ -1,8 +1,8 @@
 package ca.cgutwin.deckedout2.physics.collisions;
 
 import ca.cgutwin.deckedout2.physics.collisions.handlers.DefaultCollisionHandler;
-import ca.cgutwin.deckedout2.physics.components.BodyComponent;
 import ca.cgutwin.deckedout2.physics.components.CollisionComponent;
+import ca.cgutwin.deckedout2.physics.components.PhysicsComponent;
 import ca.cgutwin.deckedout2.world.components.TileComponent;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
@@ -18,19 +18,19 @@ import static ca.cgutwin.deckedout2.physics.PhysicsSystem.TIME_STEP;
 
 public class CollisionSystem extends IntervalIteratingSystem
 {
-  private final World world;
   private final Map<Class<? extends Component>, CollisionHandler> collisionHandlers;
-  private ComponentMapper<BodyComponent> bodyMapper;
-  private ComponentMapper<CollisionComponent> collisionMapper;
+  private final ComponentMapper<PhysicsComponent> bodyMapper;
+  private final ComponentMapper<CollisionComponent> collisionMapper;
 
   public CollisionSystem(World world) {
-    super(Family.all(BodyComponent.class, CollisionComponent.class).get(), TIME_STEP);
+    super(Family.all(CollisionComponent.class).get(), TIME_STEP);
 
-    this.world             = world;
     this.collisionHandlers = new HashMap<>();
+    this.bodyMapper        = ComponentMapper.getFor(PhysicsComponent.class);
+    this.collisionMapper   = ComponentMapper.getFor(CollisionComponent.class);
 
     setupCollisionHandlers();
-    setupCollisionListener(this.world);
+    setupCollisionListener(world);
   }
 
   private void setupCollisionHandlers() {
@@ -76,6 +76,7 @@ public class CollisionSystem extends IntervalIteratingSystem
     CollisionComponent collisionComp = collisionMapper.get(entity);
 
     if (collisionComp.collidedEntity != null && collisionComp.handler != null) {
+      System.out.println("collision");
       collisionComp.handler.handleCollision(entity, collisionComp.collidedEntity);
       collisionComp.collidedEntity = null;
     }

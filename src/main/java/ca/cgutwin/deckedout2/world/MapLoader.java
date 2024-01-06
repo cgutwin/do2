@@ -1,8 +1,8 @@
 package ca.cgutwin.deckedout2.world;
 
-import ca.cgutwin.deckedout2.physics.collisions.handlers.DefaultCollisionHandler;
-import ca.cgutwin.deckedout2.physics.components.CollisionComponent;
-import ca.cgutwin.deckedout2.rendering.RenderComponent;
+import ca.cgutwin.deckedout2.rendering.components.RenderableComponent;
+import ca.cgutwin.deckedout2.rendering.components.TextureComponent;
+import ca.cgutwin.deckedout2.rendering.renderers.TileEntityRenderer;
 import ca.cgutwin.deckedout2.util.DebugSystem;
 import ca.cgutwin.deckedout2.world.components.TileComponent;
 import com.badlogic.ashley.core.Engine;
@@ -70,12 +70,11 @@ public class MapLoader
     String tileType = properties.get("type", String.class);
 
     TileComponent tileComponent = new TileComponent(TileTypeEnum.valueOf(tileType), new Position(x, y));
-    RenderComponent renderComponent = new RenderComponent(cell.getTile().getTextureRegion());
-    CollisionComponent collisionComponent = new CollisionComponent(new DefaultCollisionHandler());
+    TextureComponent textureComponent = new TextureComponent(cell.getTile().getTextureRegion());
 
+    tileEntity.add(new RenderableComponent(new TileEntityRenderer()));
     tileEntity.add(tileComponent);
-    tileEntity.add(renderComponent);
-    tileEntity.add(collisionComponent);
+    tileEntity.add(textureComponent);
 
     engine.addEntity(tileEntity);
     DebugSystem.getInstance().sout("added entity: " + tileEntity);

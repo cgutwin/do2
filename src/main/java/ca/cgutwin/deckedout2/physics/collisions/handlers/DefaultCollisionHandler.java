@@ -7,6 +7,6 @@ public class DefaultCollisionHandler implements CollisionHandler
 {
   @Override
   public void handleCollision(Entity entityA, Entity entityB) {
-    // Default collision handling logic
+    System.out.println("collision");
   }
 }
