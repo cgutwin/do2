@@ -13,6 +13,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class PlayerCreationSystem extends EntitySystem
@@ -36,8 +38,9 @@ public class PlayerCreationSystem extends EntitySystem
     Entity playerEntity = getEngine().createEntity();
     Position position = new Position(2, 2);
 
+    TransformComponent transformComponent = new TransformComponent(position);
     // Add TransformComponent with initial position
-    playerEntity.add(new TransformComponent(position));  // Use initial x, y position
+    playerEntity.add(transformComponent);  // Use initial x, y position
 
     // Add TextureComponent with player texture
     TextureComponent textureComponent = new TextureComponent(
@@ -61,6 +64,20 @@ public class PlayerCreationSystem extends EntitySystem
     physicsComponent.body = world.createBody(bodyDef);
     physicsComponent.body.setUserData(playerEntity);
     physicsComponent.body.setLinearDamping(5);
+
+    CircleShape shape = new CircleShape();
+    shape.setRadius(8f);
+    shape.setPosition(transformComponent.position.toVector2()
+                                                 .add(textureComponent.texture.getRegionWidth() >> 1,
+                                                      textureComponent.texture.getRegionHeight() >> 1));
+
+    FixtureDef fixtureDef = new FixtureDef();
+    fixtureDef.shape               = shape;
+    fixtureDef.filter.categoryBits = 0x0002;
+    fixtureDef.filter.maskBits     = 0x0001;
+    physicsComponent.body.createFixture(fixtureDef);
+    shape.dispose();
+
     // Initialize Box2D body for physicsComponent
     playerEntity.add(physicsComponent);
 

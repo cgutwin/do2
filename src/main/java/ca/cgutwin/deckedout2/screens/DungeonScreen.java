@@ -13,18 +13,24 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 public class DungeonScreen implements Screen
 {
   private final MapRenderer mapRenderer;
+  private final Box2DDebugRenderer worldRenderer;
   GameRunner parent;
   MapLoader mapLoader;
   OrthographicCamera camera;
+
 
   public DungeonScreen(GameRunner parent) {
     this.parent      = parent;
     this.mapLoader   = new MapLoader(parent.engine(), "tiledmap/untitled.tmx");
     this.mapRenderer = new MapRenderer(mapLoader.map());
+
+    worldRenderer = new Box2DDebugRenderer();
+
 
     camera = new OrthographicCamera();
     camera.setToOrtho(false, 800, 480);
@@ -51,10 +57,10 @@ public class DungeonScreen implements Screen
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
     parent.engine().update(delta);
-    camera.update();
 
-    mapRenderer.setView(camera);
+    worldRenderer.render(parent.world(), camera.combined);
     mapRenderer.render();
+    mapRenderer.setView(camera);
   }
 
   @Override
