@@ -8,7 +8,6 @@ import ca.cgutwin.deckedout2.player.PlayerMovementSystem;
 import ca.cgutwin.deckedout2.rendering.RenderingSystem;
 import ca.cgutwin.deckedout2.util.DebugSystem;
 import ca.cgutwin.deckedout2.world.MapLoader;
-import ca.cgutwin.deckedout2.world.MapRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,28 +16,33 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+/**
+ * The DungeonScreen class represents the screen for the dungeon gameplay.
+ */
 public class DungeonScreen implements Screen
 {
-  private final MapRenderer mapRenderer;
   private final Box2DDebugRenderer worldRenderer;
   GameRunner parent;
   MapLoader mapLoader;
   OrthographicCamera camera;
   Viewport viewport;
 
-
+  /**
+   * Constructs a DungeonScreen instance.
+   *
+   * @param parent The GameRunner instance that manages the game.
+   */
   public DungeonScreen(GameRunner parent) {
-    this.parent      = parent;
-    this.mapLoader   = new MapLoader(parent.engine(), "tiledmap/untitled.tmx");
-    this.mapRenderer = new MapRenderer(mapLoader.map());
+    this.parent    = parent;
+    this.camera    = new OrthographicCamera();
+    this.mapLoader = new MapLoader(parent.engine(), camera, "tiledmap/untitled.tmx");
 
     worldRenderer = new Box2DDebugRenderer();
 
-
-    camera   = new OrthographicCamera();
     viewport = new ExtendViewport(10*32, 10*32, camera);
     camera.update();
 
+    // Add various systems to the Ashley engine
     parent.engine().addSystem(new PhysicsSystem(parent.world()));
     parent.engine().addSystem(new RenderingSystem(parent.sb()));
     parent.engine().addSystem(new CollisionSystem(parent.world()));
@@ -58,12 +62,11 @@ public class DungeonScreen implements Screen
     Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
     viewport.apply(true);
     parent.sb().setProjectionMatrix(camera.combined);
 
     worldRenderer.render(parent.world(), camera.combined);
-    mapRenderer.render();
-    mapRenderer.setView(camera);
   }
 
   @Override
@@ -88,5 +91,6 @@ public class DungeonScreen implements Screen
 
   @Override
   public void dispose() {
+    // Dispose of any resources here if needed.
   }
 }
