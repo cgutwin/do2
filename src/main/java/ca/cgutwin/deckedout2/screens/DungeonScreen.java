@@ -16,6 +16,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+/**
+ * The DungeonScreen class represents the screen for the dungeon gameplay.
+ */
 public class DungeonScreen implements Screen
 {
   private final Box2DDebugRenderer worldRenderer;
@@ -24,7 +27,11 @@ public class DungeonScreen implements Screen
   OrthographicCamera camera;
   Viewport viewport;
 
-
+  /**
+   * Constructs a DungeonScreen instance.
+   *
+   * @param parent The GameRunner instance that manages the game.
+   */
   public DungeonScreen(GameRunner parent) {
     this.parent    = parent;
     this.camera    = new OrthographicCamera();
@@ -35,6 +42,7 @@ public class DungeonScreen implements Screen
     viewport = new ExtendViewport(10*32, 10*32, camera);
     camera.update();
 
+    // Add various systems to the Ashley engine
     parent.engine().addSystem(new PhysicsSystem(parent.world()));
     parent.engine().addSystem(new RenderingSystem(parent.sb()));
     parent.engine().addSystem(new CollisionSystem(parent.world()));
@@ -83,5 +91,6 @@ public class DungeonScreen implements Screen
 
   @Override
   public void dispose() {
+    // Dispose of any resources here if needed.
   }
 }
