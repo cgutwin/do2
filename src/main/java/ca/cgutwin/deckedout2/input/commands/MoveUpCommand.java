@@ -1,5 +1,6 @@
-package ca.cgutwin.deckedout2.input;
+package ca.cgutwin.deckedout2.input.commands;
 
+import ca.cgutwin.deckedout2.input.Command;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
