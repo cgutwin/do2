@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/src/main/resources/skins/commodore64ui/commodore-64.fnt
+/src/main/resources/skins/commodore64ui/uiskin.atlas
+/src/main/resources/skins/commodore64ui/uiskin.json
+/src/main/resources/skins/commodore64ui/uiskin.png
