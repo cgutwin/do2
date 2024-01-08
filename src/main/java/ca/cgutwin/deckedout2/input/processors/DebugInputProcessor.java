@@ -1,14 +1,22 @@
 package ca.cgutwin.deckedout2.input.processors;
 
+import ca.cgutwin.deckedout2.util.debug.DebugPanel;
 import com.badlogic.gdx.InputProcessor;
 
 public class DebugInputProcessor implements InputProcessor
 {
   private final int overlayKey;
+  private final DebugPanel debugPanel;
   private boolean overlayActive = false;
 
-  public DebugInputProcessor(int overlayKey) {
+
+  public DebugInputProcessor(int overlayKey, DebugPanel debugPanel) {
     this.overlayKey = overlayKey;
+    this.debugPanel = debugPanel;
+  }
+
+  public boolean overlayActive() {
+    return overlayActive;
   }
 
   @Override
@@ -63,7 +71,11 @@ public class DebugInputProcessor implements InputProcessor
 
   private void onOverlayToggle(boolean isActive) {
     System.out.println("[F1] overlay " + (isActive ? "shown" : "hidden"));
-    // Handle overlay activation/deactivation logic
-    // E.g., pausing the game, showing/hiding the overlay UI
+    if (isActive) {
+      debugPanel.show(); // Method to show the debug panel
+    }
+    else {
+      debugPanel.hide(); // Method to hide the debug panel
+    }
   }
 }
