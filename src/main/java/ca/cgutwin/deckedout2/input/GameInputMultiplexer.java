@@ -39,11 +39,21 @@ public class GameInputMultiplexer implements InputProcessor
 
   @Override
   public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    for (InputProcessor processor: processors) {
+      if (processor.touchDown(screenX, screenY, pointer, button)) {
+        return true;
+      }
+    }
     return false;
   }
 
   @Override
   public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+    for (InputProcessor processor: processors) {
+      if (processor.touchUp(screenX, screenY, pointer, button)) {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -64,6 +74,11 @@ public class GameInputMultiplexer implements InputProcessor
 
   @Override
   public boolean scrolled(float amountX, float amountY) {
+    for (InputProcessor processor: processors) {
+      if (processor.scrolled(amountX, amountY)) {
+        return true;
+      }
+    }
     return false;
   }
 }

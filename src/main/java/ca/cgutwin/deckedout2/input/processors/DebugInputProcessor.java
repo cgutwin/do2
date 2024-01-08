@@ -41,12 +41,14 @@ public class DebugInputProcessor implements InputProcessor
 
   @Override
   public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-    return false;
+    if (overlayActive) { return debugPanel.stage().touchDown(screenX, screenY, pointer, button); }
+    else { return false; }
   }
 
   @Override
   public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-    return false;
+    if (overlayActive) { return debugPanel.stage().touchUp(screenX, screenY, pointer, button); }
+    else { return false; }
   }
 
   @Override
@@ -66,7 +68,8 @@ public class DebugInputProcessor implements InputProcessor
 
   @Override
   public boolean scrolled(float amountX, float amountY) {
-    return false;
+    if (overlayActive) { return debugPanel.stage().scrolled(amountX, amountY); }
+    else { return false; }
   }
 
   private void onOverlayToggle(boolean isActive) {
