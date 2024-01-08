@@ -3,6 +3,7 @@ package ca.cgutwin.deckedout2.physics.collisions;
 import ca.cgutwin.deckedout2.physics.collisions.handlers.DefaultCollisionHandler;
 import ca.cgutwin.deckedout2.physics.components.CollisionComponent;
 import ca.cgutwin.deckedout2.physics.components.PhysicsComponent;
+import ca.cgutwin.deckedout2.player.PlayerComponent;
 import ca.cgutwin.deckedout2.world.components.TileComponent;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
@@ -35,6 +36,7 @@ public class CollisionSystem extends IntervalIteratingSystem
 
   private void setupCollisionHandlers() {
     collisionHandlers.put(TileComponent.class, new DefaultCollisionHandler());
+    collisionHandlers.put(PlayerComponent.class, new DefaultCollisionHandler());
   }
 
   private void setupCollisionListener(World world) {

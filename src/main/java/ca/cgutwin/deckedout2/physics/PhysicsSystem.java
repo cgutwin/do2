@@ -34,7 +34,7 @@ public class PhysicsSystem extends IntervalIteratingSystem
     PhysicsComponent physicsComp = physicsMapper.get(entity);
     TransformComponent transformComp = transformMapper.get(entity);
 
-    if (physicsComp.body != null) {
+    if (physicsComp.body != null && transformMapper.has(entity)) {
       Vector2 bodyPos = physicsComp.body.getPosition();
       transformComp.position.setFromVector2(bodyPos);
     }

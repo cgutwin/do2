@@ -2,7 +2,7 @@ package ca.cgutwin.deckedout2.screens;
 
 import ca.cgutwin.deckedout2.GameRunner;
 import ca.cgutwin.deckedout2.physics.PhysicsSystem;
-import ca.cgutwin.deckedout2.physics.collisions.CollisionSystem;
+import ca.cgutwin.deckedout2.physics.collisions.GameContactListener;
 import ca.cgutwin.deckedout2.player.PlayerCreationSystem;
 import ca.cgutwin.deckedout2.player.PlayerMovementSystem;
 import ca.cgutwin.deckedout2.rendering.RenderingSystem;
@@ -35,7 +35,9 @@ public class DungeonScreen implements Screen
   public DungeonScreen(GameRunner parent) {
     this.parent    = parent;
     this.camera    = new OrthographicCamera();
-    this.mapLoader = new MapLoader(parent.engine(), camera, "tiledmap/untitled.tmx");
+    this.mapLoader = new MapLoader(parent.engine(), camera, parent.world(), "tiledmap/untitled.tmx");
+
+    parent.world().setContactListener(new GameContactListener());
 
     worldRenderer = new Box2DDebugRenderer();
 
@@ -45,7 +47,6 @@ public class DungeonScreen implements Screen
     // Add various systems to the Ashley engine
     parent.engine().addSystem(new PhysicsSystem(parent.world()));
     parent.engine().addSystem(new RenderingSystem(parent.sb()));
-    parent.engine().addSystem(new CollisionSystem(parent.world()));
     parent.engine().addSystem(new PlayerCreationSystem(parent.world()));
     parent.engine().addSystem(new PlayerMovementSystem());
 
