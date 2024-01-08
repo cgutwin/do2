@@ -4,7 +4,6 @@ import ca.cgutwin.deckedout2.GameRunner;
 import ca.cgutwin.deckedout2.physics.PhysicsSystem;
 import ca.cgutwin.deckedout2.physics.collisions.CollisionSystem;
 import ca.cgutwin.deckedout2.player.PlayerCreationSystem;
-import ca.cgutwin.deckedout2.player.PlayerMovementSystem;
 import ca.cgutwin.deckedout2.rendering.RenderingSystem;
 import ca.cgutwin.deckedout2.util.DebugSystem;
 import ca.cgutwin.deckedout2.world.MapLoader;
@@ -47,7 +46,6 @@ public class DungeonScreen implements Screen
     parent.engine().addSystem(new RenderingSystem(parent.sb()));
     parent.engine().addSystem(new CollisionSystem(parent.world()));
     parent.engine().addSystem(new PlayerCreationSystem(parent.world()));
-    parent.engine().addSystem(new PlayerMovementSystem());
 
     DebugSystem.getInstance().sout("engines added: " + parent.engine().getSystems());
   }
