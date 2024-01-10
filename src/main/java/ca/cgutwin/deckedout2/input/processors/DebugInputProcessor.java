@@ -15,10 +15,6 @@ public class DebugInputProcessor implements InputProcessor
     this.debugPanel = debugPanel;
   }
 
-  public boolean overlayActive() {
-    return overlayActive;
-  }
-
   @Override
   public boolean keyDown(int keycode) {
     if (keycode == overlayKey) {
@@ -74,11 +70,6 @@ public class DebugInputProcessor implements InputProcessor
 
   private void onOverlayToggle(boolean isActive) {
     System.out.println("[F1] overlay " + (isActive ? "shown" : "hidden"));
-    if (isActive) {
-      debugPanel.show(); // Method to show the debug panel
-    }
-    else {
-      debugPanel.hide(); // Method to hide the debug panel
-    }
+    debugPanel.setVisible(isActive); // Method to show the debug panel
   }
 }

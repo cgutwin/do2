@@ -16,12 +16,16 @@ import com.badlogic.gdx.physics.box2d.World;
 public class GameRunner extends Game
 {
   GameInputMultiplexer inputMultiplexer;
-  DebugInputProcessor debugInputProcessor;
   PlayerInputProcessor playerInputProcessor;
-  private DebugPanel debugPanel;
+  DebugInputProcessor debugInputProcessor;
   private SpriteBatch batch;
   private Engine engine;
   private World world;
+  private DebugPanel debugPanel;
+
+  public DebugPanel debugPanel() {
+    return debugPanel;
+  }
 
   public World world() {
     return world;
@@ -37,11 +41,11 @@ public class GameRunner extends Game
 
   @Override
   public void create() {
-    this.batch      = new SpriteBatch();
-    this.engine     = new Engine();
-    this.world      = new World(new Vector2(0, 0), true);
-    this.debugPanel = new DebugPanel(engine);
+    this.batch  = new SpriteBatch();
+    this.engine = new Engine();
+    this.world  = new World(new Vector2(0, 0), true);
 
+    debugPanel = new DebugPanel(engine);
     setupInputMultiplexer();
 
     this.setScreen(new DungeonScreen(this));
@@ -50,11 +54,10 @@ public class GameRunner extends Game
   private void setupInputMultiplexer() {
     inputMultiplexer = new GameInputMultiplexer();
 
-    debugInputProcessor  = new DebugInputProcessor(Input.Keys.F1, this.debugPanel);
     playerInputProcessor = new PlayerInputProcessor(engine);
-
-    inputMultiplexer.addProcessor(debugInputProcessor);
+    debugInputProcessor  = new DebugInputProcessor(Input.Keys.F1, debugPanel);
     inputMultiplexer.addProcessor(playerInputProcessor);
+    inputMultiplexer.addProcessor(debugInputProcessor);
 
     Gdx.input.setInputProcessor(inputMultiplexer);
   }
@@ -72,8 +75,11 @@ public class GameRunner extends Game
     playerInputProcessor.update(delta);
     engine.update(delta);
 
-    if (debugInputProcessor.overlayActive()) {
-      debugPanel.render(Gdx.graphics.getDeltaTime());
-    }
+    debugPanel.render(delta);
+  }
+
+  @Override
+  public void resize(int width, int height) {
+    super.resize(width, height);
   }
 }

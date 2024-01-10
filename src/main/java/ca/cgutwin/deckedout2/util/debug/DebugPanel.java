@@ -11,56 +11,89 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class DebugPanel implements EntityListener
 {
   private final Stage stage;
-  private final Window window;
   private final Engine engine;
   private final Skin skin;
-  private SelectBox<Entity> entitySelectBox;
-  private SelectBox<Component> componentSelectBox;
+  private final Viewport viewport = new ScreenViewport();
+  private List<Entity> entityList;
+  private List<Component> componentList;
+  private boolean visible;
 
   public DebugPanel(Engine engine) {
     this.engine = engine;
     this.engine.addEntityListener(this);
 
-    skin   = new Skin(Gdx.files.internal("skins/commodore64ui/uiskin.json"));
-    stage  = new Stage();
-    window = new Window("Debug Panel", skin);
+    skin  = new Skin(Gdx.files.internal("skins/commodore64ui/uiskin.json"));
+    stage = new Stage(viewport);
 
     initUI();
   }
 
+
   private void initUI() {
     Table table = new Table();
-    table.setFillParent(true); // The table will fill the entire stage
+    table.setBackground(skin.getDrawable("window"));
+    table.setFillParent(true);
 
-    // Entity label
-    Label entitiesLabel = new Label("ENTITIES", skin);
-    Label componentsLabel = new Label("COMPONENTS", skin);
+    Label label = new Label("DEBUG", skin);
+    table.add(label).align(Align.left);
 
-    // Dropdown (SelectBox) for entities
-    entitySelectBox    = new SelectBox<>(skin);
-    componentSelectBox = new SelectBox<>(skin);
+    TextButton textButton = new TextButton("X", skin);
+    textButton.setName("panel_close");
+    table.add(textButton).align(Align.right);
 
-    // Add components to the table
-    table.add(entitiesLabel).pad(10);
-    table.row(); // Move to next row
-    table.add(entitySelectBox).pad(10).fillX().row();
+    table.row();
+    Table table1 = new Table();
+    table1.align(Align.topLeft);
 
-    table.add(componentsLabel).pad(10).row();
-    table.add(componentSelectBox).pad(10).row();
+    label = new Label("Entities", skin);
+    table1.add(label).align(Align.left);
 
-    // Add table to the stage
+    table1.row();
+
+    entityList = new List<>(skin);
+    entityList.setName("entitiesList");
+    ScrollPane scrollPane = new ScrollPane(entityList, skin);
+    table1.add(scrollPane).expandY().align(Align.topLeft).uniformY();
+
+    table1.row();
+    label = new Label("Components", skin);
+    table1.add(label).align(Align.left);
+
+    table1.row();
+
+    componentList = new List<>(skin);
+    componentList.setName("componentsList");
+    scrollPane = new ScrollPane(componentList, skin);
+    table1.add(scrollPane).expandY().align(Align.topLeft).uniformY();
+    table.add(table1).pad(16.0f).growY().align(Align.left);
+
+    table1 = new Table();
+    table1.align(Align.left);
+
+    label = new Label("Data", skin);
+    table1.add(label).expandX().align(Align.left);
+
+    table1.row();
+    List<String> dataList = new List<>(skin);
+    dataList.setName("dataList");
+    table1.add(dataList).growY();
+    table.add(table1).growY();
     stage.addActor(table);
 
-    entitySelectBox.addListener(new ChangeListener()
+
+    entityList.addListener(new ChangeListener()
     {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
-        Entity selectedEntity = entitySelectBox.getSelected();
+        Entity selectedEntity = entityList.getSelected();
         if (selectedEntity != null) {
           updateComponentsList(selectedEntity);
         }
@@ -71,7 +104,7 @@ public class DebugPanel implements EntityListener
   private void updateComponentsList(Entity entity) {
     // Assuming you have a method to get components from an entity
     ImmutableArray<Component> components = entity.getComponents();
-    componentSelectBox.setItems(components.toArray(Component.class));
+    componentList.setItems(components.toArray(Component.class));
   }
 
   public Stage stage() {
@@ -79,16 +112,10 @@ public class DebugPanel implements EntityListener
   }
 
   public void render(float delta) {
-    stage.act(delta);
-    stage.draw();
-  }
-
-  public void show() {
-    window.setVisible(true);
-  }
-
-  public void hide() {
-    window.setVisible(false);
+    if (visible) {
+      stage.act(delta);
+      stage.draw();
+    }
   }
 
   @Override
@@ -103,6 +130,14 @@ public class DebugPanel implements EntityListener
 
   private void updateEntitiesList() {
     ImmutableArray<Entity> entities = engine.getEntities();
-    entitySelectBox.setItems(entities.toArray(Entity.class));
+    entityList.setItems(entities.toArray(Entity.class));
+  }
+
+  public boolean shown() {
+    return visible;
+  }
+
+  public void setVisible(boolean visible) {
+    this.visible = visible;
   }
 }

@@ -45,8 +45,9 @@ public class PlayerInputProcessor implements InputProcessor
   public boolean keyDown(int keycode) {
     if (keyCommandMap.containsKey(keycode)) {
       pressedKeys.add(keycode);
+      return true;
     }
-    return true;
+    return false;
   }
 
   @Override

@@ -52,7 +52,6 @@ public class DungeonScreen implements Screen
 
   @Override
   public void show() {
-
   }
 
   @Override
